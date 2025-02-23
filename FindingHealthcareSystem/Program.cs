@@ -1,3 +1,11 @@
+using BusinessObjects;
+using BusinessObjects.Entities;
+using DataAccessObjects;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+
+
 namespace FindingHealthcareSystem
 {
     public class Program
@@ -8,6 +16,9 @@ namespace FindingHealthcareSystem
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+            builder.Services.AddDbContext<FindingHealthcareSystemContext>(o =>
+            o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
+            builder.Services.AddApplicationService();
 
             var app = builder.Build();
 
@@ -21,6 +32,7 @@ namespace FindingHealthcareSystem
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
 
             app.UseRouting();
 

@@ -1,10 +1,83 @@
 ﻿@page
 @model IndexModel
-@{
-    ViewData["Title"] = "Home page";
-}
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h2>User Management</h2>
+
+<form method="get">
+    <div class="form-group">
+        <input type="text" asp-for="Search" placeholder="Search by name, email, or phone" class="form-control" />
+    </div>
+    <div class="form-group">
+        <select asp-for="Role" class="form-control">
+            <option value="">All Roles</option>
+            <option value="Admin">Admin</option>
+            <option value="User">User</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <select asp-for="Status" class="form-control">
+            <option value="">All Status</option>
+            <option value="Active">Active</option>
+            <option value="Inactive">Inactive</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <select asp-for="SortBy" class="form-control">
+            <option value="fullname">Name</option>
+            <option value="email">Email</option>
+            <option value="phonenumber">Phone</option>
+            <option value="role">Role</option>
+            <option value="status">Status</option>
+        </select>
+        <input type="checkbox" asp-for="IsDescending" /> Descending
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Role</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>@user.Fullname</td>
+                <td>@user.Email</td>
+                <td>@user.PhoneNumber</td>
+                <td>@user.Role</td>
+                <td>@user.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- Pagination Controls -->
+<nav>
+    <ul class="pagination">
+        @if (Model.Users.HasPreviousPage)
+        {
+            <li class="page-item">
+                <a class="page-link" asp-page="./Users" asp-route-PageIndex="@(Model.PageIndex - 1)"
+                   asp-route-Search="@Model.Search" asp-route-Role="@Model.Role"
+                   asp-route-Status="@Model.Status" asp-route-SortBy="@Model.SortBy"
+                   asp-route-IsDescending="@Model.IsDescending">Previous</a>
+            </li>
+        }
+        @if (Model.Users.HasNextPage)
+        {
+            <li class="page-item">
+                <a class="page-link" asp-page="./Users" asp-route-PageIndex="@(Model.PageIndex + 1)"
+                   asp-route-Search="@Model.Search" asp-route-Role="@Model.Role"
+                   asp-route-Status="@Model.Status" asp-route-SortBy="@Model.SortBy"
+                   asp-route-IsDescending="@Model.IsDescending">Next</a>
+            </li>
+        }
+    </ul>
+</nav>
