@@ -112,7 +112,17 @@ CREATE TABLE [PrivateService] (
   [Price] DECIMAL(19, 0),
   [Name] NVARCHAR(255),
   [Description] NVARCHAR(MAX)
-  PRIMARY KEY ([ServiceID]), 
+  PRIMARY KEY ([ServiceID])
+);
+
+
+CREATE TABLE [PrivateService] (
+  [ServiceID] UNIQUEIDENTIFIER,
+  [ProfessionalID] UNIQUEIDENTIFIER,
+  PRIMARY KEY ([ServiceID]),
+  CONSTRAINT [FK_PrivateService_ServiceID] 
+	FOREIGN KEY ([ServiceID])
+		REFERENCES [Service]([ServiceID]),
   CONSTRAINT [FK_PrivateService_ProfessionalID]
     FOREIGN KEY ([ProfessionalID])
       REFERENCES [Professional]([ProfessionalID])
@@ -176,6 +186,9 @@ CREATE TABLE [PublicService] (
   CONSTRAINT [FK_PublicService_FacilityID]
     FOREIGN KEY ([FacilityID])
       REFERENCES [Facility]([FacilityID]),
+  CONSTRAINT [FK_PublicService_ServiceID] 
+	FOREIGN KEY ([ServiceID])
+		REFERENCES [Service]([ServiceID]),
 );
 
 
@@ -204,6 +217,12 @@ CREATE TABLE [Appointment] (
   CONSTRAINT [FK_Appointment_PatientID]
     FOREIGN KEY ([PatientID])
       REFERENCES [Patient]([PatientID]),
+  CONSTRAINT [FK_Appointment_ProfessionalID]
+    FOREIGN KEY ([ProfessionalID])
+      REFERENCES [Professional]([ProfessionalID]),
+  CONSTRAINT [FK_Appointment_ServiceID]
+    FOREIGN KEY ([ServiceID])
+      REFERENCES [Service]([ServiceID]),
   CONSTRAINT [FK_Appointment_PaymentID]
     FOREIGN KEY ([PaymentID])
       REFERENCES [Payment]([PaymentID])
@@ -213,6 +232,9 @@ CREATE TABLE [MedicalRecord] (
   [MedicalRecordID] INT IDENTITY(1,1),
   [AppointmentID] INT,
   [DateCreated] DATETIME,
+  [Symptoms] NVARCHAR(MAX),
+  [Diagnosis] NVARCHAR(MAX),
+  [Prescription] NVARCHAR(MAX),
   [Note] NVARCHAR(MAX),
   PRIMARY KEY ([MedicalRecordID]),
   CONSTRAINT [FK_MedicalRecord_AppointmentID]
@@ -240,6 +262,9 @@ CREATE TABLE [Review] (
   [Comment] NVARCHAR(MAX),
   [Date] DATETIME,
   PRIMARY KEY ([ReviewID]),
+  CONSTRAINT [FK_Review_ProfessionalID]
+    FOREIGN KEY ([ProfessionalID])
+      REFERENCES [Professional]([ProfessionalID]),
   CONSTRAINT [FK_Review_PatientID]
     FOREIGN KEY ([PatientID])
       REFERENCES [Patient]([PatientID])
