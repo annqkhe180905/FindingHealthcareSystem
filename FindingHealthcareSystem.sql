@@ -8,7 +8,7 @@ USE [FindingHealthcareSystem]
 GO
 
 CREATE TABLE [User] (
-  [UserID] UNIQUEIDENTIFIER,
+  [UserID] INT IDENTITY(1,1),
   [Role] NVARCHAR(255),
   [Password] NVARCHAR(MAX),
   [PhoneNumber] NVARCHAR(50),
@@ -16,12 +16,13 @@ CREATE TABLE [User] (
   [Email] NVARCHAR(255),
   [Gender] NVARCHAR(50),
   [Birthday] DATE,
+  [Status] NVARCHAR(50),
   PRIMARY KEY ([UserID])
 );
 
 CREATE TABLE [Patient] (
-  [PatientID] UNIQUEIDENTIFIER,
-  [UserID] UNIQUEIDENTIFIER,
+  [PatientID] INT IDENTITY(1,1),
+  [UserID] INT,
   [Note] NVARCHAR(MAX),
   PRIMARY KEY ([PatientID]),
   CONSTRAINT [FK_Patient_UserID]
@@ -31,16 +32,16 @@ CREATE TABLE [Patient] (
 );
 
 CREATE TABLE [UnderlyingDisease] (
-  [ID] UNIQUEIDENTIFIER,
+  [ID] INT IDENTITY(1,1),
   [Name] NVARCHAR(255),
   [Description] NVARCHAR(MAX),
   PRIMARY KEY ([ID])
 );
 
 CREATE TABLE [PatientUnderlyingDisease] (
-  [ID] UNIQUEIDENTIFIER,
-  [UnderlyingDiseaseID] UNIQUEIDENTIFIER,
-  [PatientID] UNIQUEIDENTIFIER,
+  [ID] INT IDENTITY(1,1),
+  [UnderlyingDiseaseID] INT,
+  [PatientID] INT,
   PRIMARY KEY ([ID]),
   CONSTRAINT [FK_PatientUnderlyingDisease_UnderlyingDiseaseID]
     FOREIGN KEY ([UnderlyingDiseaseID])
@@ -53,23 +54,24 @@ CREATE TABLE [PatientUnderlyingDisease] (
 );
 
 CREATE TABLE [Expertise] (
-  [ExpertiseID] UNIQUEIDENTIFIER,
+  [ExpertiseID] INT IDENTITY(1,1),
   [Name] NVARCHAR(255),
   [Description] NVARCHAR(MAX),
   PRIMARY KEY ([ExpertiseID])
 );
 
 CREATE TABLE [Professional] (
-  [ProfessionalID] UNIQUEIDENTIFIER,
-  [UserID] UNIQUEIDENTIFIER UNIQUE,
-  [ExpertiseID] UNIQUEIDENTIFIER,
+  [ProfessionalID] INT IDENTITY(1,1),
+  [UserID] INT UNIQUE,
+  [ExpertiseID] INT,
   [Province] NVARCHAR(255),
   [District] NVARCHAR(255),
-  [Commune] NVARCHAR(255),
+  [City] NVARCHAR(255),
   [Address] NVARCHAR(MAX),
   [Degree] NVARCHAR(255),
   [Experience] NVARCHAR(255),
   [WorkingHours] NVARCHAR(255),
+  [RequestStatus] NVARCHAR(255),
   PRIMARY KEY ([ProfessionalID]),
   CONSTRAINT [FK_Professional_UserID]
 	FOREIGN KEY ([UserID]) 
@@ -81,7 +83,7 @@ CREATE TABLE [Professional] (
 );
 
 CREATE TABLE [Specialty] (
-  [SpecialtyID] UNIQUEIDENTIFIER,
+  [SpecialtyID] INT IDENTITY(1,1),
   [Name] NVARCHAR(255),
   [Description] NVARCHAR(MAX),
   PRIMARY KEY ([SpecialtyID])
@@ -89,9 +91,9 @@ CREATE TABLE [Specialty] (
 
 
 CREATE TABLE [ProfessionalSpecialty] (
-  [ID] UNIQUEIDENTIFIER,
-  [ProfessionalID] UNIQUEIDENTIFIER,
-  [SpecialtyID] UNIQUEIDENTIFIER,
+  [ID] INT IDENTITY(1,1),
+  [ProfessionalID] INT,
+  [SpecialtyID] INT,
   PRIMARY KEY ([ID]),
   CONSTRAINT [FK_ProfessionalSpecialty_SpecialtyID]
     FOREIGN KEY ([SpecialtyID])
@@ -103,8 +105,10 @@ CREATE TABLE [ProfessionalSpecialty] (
 		ON DELETE CASCADE,
 );
 
-CREATE TABLE [Service] (
-  [ServiceID] UNIQUEIDENTIFIER,
+
+CREATE TABLE [PrivateService] (
+  [ServiceID] INT IDENTITY(1,1),
+  [ProfessionalID] INT,
   [Price] DECIMAL(19, 0),
   [Name] NVARCHAR(255),
   [Description] NVARCHAR(MAX)
@@ -127,22 +131,23 @@ CREATE TABLE [PrivateService] (
 
 
 CREATE TABLE [FacilityType] (
-  [TypeID] UNIQUEIDENTIFIER,
+  [TypeID] INT IDENTITY(1,1),
   [Name] NVARCHAR(255),
   [Description] NVARCHAR(MAX),
   PRIMARY KEY ([TypeID])
 );
 
 CREATE TABLE [Facility] (
-  [FacilityID] UNIQUEIDENTIFIER,
-  [TypeID] UNIQUEIDENTIFIER,
+  [FacilityID] INT IDENTITY(1,1),
+  [TypeID] INT,
   [Name] NVARCHAR(255),
   [OperationDay] DATE,
   [Province] NVARCHAR(255),
   [District] NVARCHAR(255),
-  [Commune] NVARCHAR(255),
+  [City] NVARCHAR(255),
   [Address] NVARCHAR(MAX),
   [Description] NVARCHAR(MAX),
+  [Status] NVARCHAR(50),
   PRIMARY KEY ([FacilityID]),
   CONSTRAINT [FK_Facility_TypeID]
     FOREIGN KEY ([TypeID])
@@ -150,16 +155,16 @@ CREATE TABLE [Facility] (
 );
 
 CREATE TABLE [Department] (
-  [DepartmentID] UNIQUEIDENTIFIER,
+  [DepartmentID] INT IDENTITY(1,1),
   [Name] NVARCHAR(255),
   [Description] NVARCHAR(MAX),
   PRIMARY KEY ([DepartmentID])
 );
 
 CREATE TABLE [FacilityDepartment] (
-  [ID] UNIQUEIDENTIFIER,
-  [FacilityID] UNIQUEIDENTIFIER,
-  [DepartmentID] UNIQUEIDENTIFIER,
+  [ID] INT IDENTITY(1,1),
+  [FacilityID] INT,
+  [DepartmentID] INT,
   PRIMARY KEY ([ID]),
   CONSTRAINT [FK_FacilityDepartment_FacilityID]
     FOREIGN KEY ([FacilityID])
@@ -172,8 +177,11 @@ CREATE TABLE [FacilityDepartment] (
 );
 
 CREATE TABLE [PublicService] (
-  [ServiceID] UNIQUEIDENTIFIER,
-  [FacilityID] UNIQUEIDENTIFIER,
+  [ServiceID] INT IDENTITY(1,1),
+  [FacilityID] INT,
+  [Price] DECIMAL(19, 0),
+  [Name] NVARCHAR(255),
+  [Description] NVARCHAR(MAX)
   PRIMARY KEY ([ServiceID]),
   CONSTRAINT [FK_PublicService_FacilityID]
     FOREIGN KEY ([FacilityID])
@@ -185,7 +193,7 @@ CREATE TABLE [PublicService] (
 
 
 CREATE TABLE [Payment] (
-  [PaymentID] UNIQUEIDENTIFIER,
+  [PaymentID] INT IDENTITY(1,1),
   [PaymentMethod] NVARCHAR(255),
   [TransactionID] NVARCHAR(255),
   [PaymentStatus] NVARCHAR(255),
@@ -195,12 +203,14 @@ CREATE TABLE [Payment] (
 );
 
 CREATE TABLE [Appointment] (
-  [AppointmentID] UNIQUEIDENTIFIER,
-  [PatientID] UNIQUEIDENTIFIER,
-  [ProfessionalID] UNIQUEIDENTIFIER,
-  [ServiceID] UNIQUEIDENTIFIER,
+  [AppointmentID] INT IDENTITY(1,1),
+  [PatientID] INT,
+  [ProviderID] INT,
+  [ProviderType] NVARCHAR(50),
+  [ServiceID] INT,
+  [ServiceType] NVARCHAR(50),
   [Status] NVARCHAR(255),
-  [PaymentID] UNIQUEIDENTIFIER,
+  [PaymentID] INT,
   [Description] NVARCHAR(MAX),
   [Date] DATETIME,
   PRIMARY KEY ([AppointmentID]),
@@ -219,8 +229,8 @@ CREATE TABLE [Appointment] (
 );
 
 CREATE TABLE [MedicalRecord] (
-  [MedicalRecordID] UNIQUEIDENTIFIER,
-  [AppointmentID] UNIQUEIDENTIFIER,
+  [MedicalRecordID] INT IDENTITY(1,1),
+  [AppointmentID] INT,
   [DateCreated] DATETIME,
   [Symptoms] NVARCHAR(MAX),
   [Diagnosis] NVARCHAR(MAX),
@@ -233,8 +243,8 @@ CREATE TABLE [MedicalRecord] (
 );
 
 CREATE TABLE [Attachments] (
-  [ID] UNIQUEIDENTIFIER,
-  [MedicalRecordID] UNIQUEIDENTIFIER,
+  [ID] INT IDENTITY(1,1),
+  [MedicalRecordID] INT,
   [Url] NVARCHAR(MAX),
   PRIMARY KEY ([ID]),
   CONSTRAINT [FK_Attachments_MedicalRecordID]
@@ -244,9 +254,10 @@ CREATE TABLE [Attachments] (
 
 
 CREATE TABLE [Review] (
-  [ReviewID] UNIQUEIDENTIFIER,
-  [ProfessionalID] UNIQUEIDENTIFIER,
-  [PatientID] UNIQUEIDENTIFIER,
+  [ReviewID] INT IDENTITY(1,1),
+  [ProviderID] INT,
+  [ProviderType] NVARCHAR(50),
+  [PatientID] INT,
   [Rating] INT,
   [Comment] NVARCHAR(MAX),
   [Date] DATETIME,
@@ -260,22 +271,25 @@ CREATE TABLE [Review] (
 );
 
 CREATE TABLE [Category] (
-  [CategoryID] UNIQUEIDENTIFIER,
+  [CategoryID] INT IDENTITY(1,1),
   [Name] NVARCHAR(255),
   [Description] NVARCHAR(MAX),
   PRIMARY KEY ([CategoryID])
 );
 
 CREATE TABLE [Article] (
-  [ArticleID] UNIQUEIDENTIFIER,
-  [CategoryID] UNIQUEIDENTIFIER,
+  [ArticleID] INT IDENTITY(1,1),
+  [CategoryID] INT,
   [Title] NVARCHAR(255),
   [CreatedAt] DATETIME,
-  [CreatedBy] NVARCHAR(255),
+  [CreatedByID] INT,
   [Content] NVARCHAR(MAX),
   PRIMARY KEY ([ArticleID]),
   CONSTRAINT [FK_Article_CategoryID]
     FOREIGN KEY ([CategoryID])
-      REFERENCES [Category]([CategoryID])
+      REFERENCES [Category]([CategoryID]),
+  CONSTRAINT [FK_Article_CreatedBy]
+    FOREIGN KEY ([CreatedByID])
+      REFERENCES [User]([UserID])
 );
 
