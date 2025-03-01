@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccessObjects.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigrations : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -520,6 +520,19 @@ namespace DataAccessObjects.Migrations
                         column: x => x.MedicalRecordId,
                         principalTable: "MedicalRecords",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.InsertData(
+                table: "Departments",
+                columns: new[] { "Id", "Description", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Chuyên điều trị các bệnh lý nội khoa như tim mạch, tiêu hóa, thần kinh.", "Khoa Nội" },
+                    { 2, "Chuyên phẫu thuật và điều trị các bệnh lý ngoại khoa.", "Khoa Ngoại" },
+                    { 3, "Chuyên chăm sóc sức khỏe phụ nữ, mang thai, sinh nở và các vấn đề liên quan.", "Khoa Sản" },
+                    { 4, "Chuyên điều trị các bệnh lý liên quan đến trẻ em và trẻ sơ sinh.", "Khoa Nhi" },
+                    { 5, "Chuyên thực hiện các xét nghiệm chẩn đoán bệnh lý.", "Khoa Xét nghiệm" },
+                    { 6, "Chuyên thực hiện các kỹ thuật hình ảnh như X-quang, MRI, CT scan.", "Khoa Chẩn đoán hình ảnh" }
                 });
 
             migrationBuilder.InsertData(

@@ -1,44 +1,49 @@
 using BusinessObjects.Commons;
 using BusinessObjects.Dtos.User;
+using BusinessObjects.DTOs.Department;
+using BusinessObjects.DTOs.Facility;
+using BusinessObjects.LocationModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Services.Interfaces;
+using Services.Services;
 
 namespace FindingHealthcareSystem.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly IUserService _userService;
-        public PaginatedList<GeneralUserDto> Users { get; set; } = new(new List<GeneralUserDto>(), 0, 1, 10);
+        private readonly ILocationService _locationService;
+        private readonly IDepartmentService _departmentService;
+        private readonly IFacilityTypeService _facilityTypeService;
+
+        public List<Province> Provinces { get; set; }
+        public List<DepartmentDto> Departments { get; set; }
+        public List<FacilityTypeDto> FacilityTypes { get; set; }
+
 
         [BindProperty(SupportsGet = true)]
-        public string Search { get; set; } = string.Empty;
+        public string SelectedProvinceCode { get; set; }
 
-        [BindProperty(SupportsGet = true)]
-        public string Role { get; set; } = string.Empty;
-
-        [BindProperty(SupportsGet = true)]
-        public string Status { get; set; } = string.Empty;
-
-        [BindProperty(SupportsGet = true)]
-        public string SortBy { get; set; } = "fullname";
-
-        [BindProperty(SupportsGet = true)]
-        public bool IsDescending { get; set; } = false;
-
-        [BindProperty(SupportsGet = true)]
-        public int PageIndex { get; set; } = 1;
-
-        private const int PageSize = 10;
-
-        public IndexModel(IUserService userService)
+        public IndexModel(ILocationService locationService, IDepartmentService departmentService, IFacilityTypeService facilityTypeService)
         {
-            _userService = userService;
+            _locationService = locationService;
+            _departmentService = departmentService;
+            _facilityTypeService = facilityTypeService;
         }
 
         public async Task OnGetAsync()
         {
-            Users = await _userService.GetUsersAsync(Search, Role, Status, SortBy, IsDescending, PageIndex, PageSize);
+            Provinces = await _locationService.GetProvinces(); 
+            Departments = await _departmentService.GetAllDepartments();
+            FacilityTypes = await _facilityTypeService.GetAllFacilityTypes();
+
+        }
+
+        public async Task OnPostAsync()
+        {
+            Provinces = await _locationService.GetProvinces();
+
         }
     }
+
 }

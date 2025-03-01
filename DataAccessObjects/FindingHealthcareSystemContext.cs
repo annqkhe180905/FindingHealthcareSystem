@@ -178,6 +178,8 @@ public partial class FindingHealthcareSystemContext : DbContext
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new DepartmentConfiguration());
+            modelBuilder.ApplyConfiguration(new FacilityTypeConfiguration());
 
             OnModelCreatingPartial(modelBuilder);
         
