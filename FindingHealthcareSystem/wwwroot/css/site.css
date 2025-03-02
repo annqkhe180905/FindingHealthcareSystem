@@ -1,22 +1,294 @@
-html {
-  font-size: 14px;
+
+*, *::after, *::before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
 
 body {
-  margin-bottom: 60px;
+    font-family: 'Lexend Deca', sans-serif;
+    color: #9d9d9d;
 }
+
+
+.nav-bg {
+    background-image: url(../img/hader-bg.png);
+    background-color: #f1f7eb;
+    background-repeat: no-repeat;
+    background-position: center 0;
+}
+
+.navbar-brand {
+    font-size: larger;
+    color: #4b4b4b;
+    font-weight: bold;
+    width: 120px;
+    margin-right: 200px;
+
+}
+
+.navbar {
+    display: flex;
+    background-color: transparent;
+    z-index: 10;
+    margin: 0 auto;
+    padding: 20px 0;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+.navbar-brand:hover {
+    color: #555;
+}
+    .navbar .create-account {
+        text-decoration: none;
+        font-weight: 600;
+        background-color: #92d35e;
+        border: none;
+        border-radius: 12px;
+        -webkit-transition: background-color 0.3sease;
+        transition: background-color 0.3sease;
+    }
+
+    .navbar .create-account a {
+        margin-right: 0;
+        color: white !important;
+    }
+
+    .navbar li .nav-link {
+        display: inline-block;
+        color: #4b4b4b;
+        padding: 15px 30px !important;
+    }
+.nav-link {
+    display: block;
+    padding: .5rem 1rem;
+    color: #0d6efd;
+    text-decoration: none;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+}
+.navbar-nav .nav-link.active {
+    font-weight: bold;
+}
+
+
+
+
+.intro {
+    height: 95vh;
+    overflow: visible;
+}
+
+
+.intro {
+    background-image: url(../img/hader-bg.png);
+    background-color: #f1f7eb;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    padding: 120px 0px 50px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+
+    .intro .intro-text {
+        text-align: center;
+        z-index: 5;
+    }
+        .intro .intro-text .check-out {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .intro .intro-text .form {
+            padding: 15px 20px 15px 40px;
+            background-color: white;
+            border-radius: 12px;
+            width: 55%; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px; 
+        }
+
+            .intro .intro-text .form .medic-search {
+                margin-right: 0;
+                display: flex;
+                align-items: center;
+            }
+
+                .intro .intro-text .form .medic-search input {
+                    padding: 8px 12px;
+                    font-size: 16px;
+                    border-radius: 5px;
+                    border: 1px solid #ddd;
+                    width: 250px;
+                }
+
+            .intro .intro-text .form div {
+                display: inline-block;
+                margin-top: 0;
+            }
+
+            .intro .intro-text .form input, .intro .intro-text .form select {
+                border: none;
+                -webkit-box-shadow: none;
+                box-shadow: none;
+                outline: none;
+            }
+
+            .intro .intro-text .form .location .search {
+                margin-left: 30px;
+                padding: 10px 25px !important;
+                border-radius: 10px;
+            }
+
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    width: 50%;
+
+}
+
+    .search-form .form-control,
+    .search-form .search-btn {
+        margin: 0;
+    }
+
+    .search-form select.form-control {
+        padding: 8px 12px;
+        font-size: 14px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        width: 250px;
+    }
+
+.search-btn {
+    background-color: #92d35e;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    .search-btn:hover {
+        background-color: #45a049;
+    }
+
+
+.main-btn {
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    background-color: #92d35e;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 12px;
+    -webkit-transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease;
+}
+
+input, textarea {
+    border-radius: 0px;
+    border: 1px solid #e7e7e7 !important;
+}
+
+button, input, optgroup, select, textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+        
+
+.green {
+    color: #92d35e;
+}
+
+h1 {
+    font-size: 3.5em;
+    margin-bottom: 40px;
+    color: #4b4b4b;
+    font-weight: 800;
+    margin-top: 0;
+}
+
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: .5rem;
+    line-height: 1.2;
+}
+
+.department-card {
+    height: 200px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #ddd;
+    border-radius: 10%;
+    background-color: #F9FBF6; 
+}
+
+    .department-card .card-body {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+        .department-card .card-body .card-title {
+            text-align: center;
+            font-size: large;
+            color: #4B4B4B;
+            font-weight: bold;
+        }
+
+.carousel-control-prev, .carousel-control-next {
+    position: absolute;
+    top: 50%; 
+    transform: translateY(-50%); 
+    background-color: #92d35e; 
+    border-radius: 50%;
+    width: 60px; 
+    height: 60px; 
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    color: white; 
+    border: none; 
+    z-index: 10; 
+}
+}
+
+    .carousel-control-prev i, .carousel-control-next i {
+        font-size: 30px;
+    }
+
+.carousel-control-prev, .carousel-control-next {
+    outline: none; 
+}
+
+#departmentCarousel {
+    position: relative; 
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    width: 100%;
+}
+
+.carousel-item {
+    padding: 10px;
+}
+

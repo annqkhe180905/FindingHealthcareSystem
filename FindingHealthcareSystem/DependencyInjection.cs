@@ -20,7 +20,10 @@ namespace FindingHealthcareSystem
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped(typeof(IGenericDAO<>), typeof(GenericDAO<>));
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IDepartmentService, DepartmentService>();
+            services.AddScoped<IFacilityTypeService, FacilityTypeService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<ILocationService, LocationService>(); 
 
 
             return services;

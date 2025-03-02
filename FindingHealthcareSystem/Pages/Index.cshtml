@@ -1,83 +1,95 @@
 ﻿@page
 @model IndexModel
-
-<h2>User Management</h2>
-
-<form method="get">
-    <div class="form-group">
-        <input type="text" asp-for="Search" placeholder="Search by name, email, or phone" class="form-control" />
-    </div>
-    <div class="form-group">
-        <select asp-for="Role" class="form-control">
-            <option value="">All Roles</option>
-            <option value="Admin">Admin</option>
-            <option value="User">User</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <select asp-for="Status" class="form-control">
-            <option value="">All Status</option>
-            <option value="Active">Active</option>
-            <option value="Inactive">Inactive</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <select asp-for="SortBy" class="form-control">
-            <option value="fullname">Name</option>
-            <option value="email">Email</option>
-            <option value="phonenumber">Phone</option>
-            <option value="role">Role</option>
-            <option value="status">Status</option>
-        </select>
-        <input type="checkbox" asp-for="IsDescending" /> Descending
-    </div>
-    <button type="submit" class="btn btn-primary">Search</button>
-</form>
-
-<table class="table table-striped mt-3">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Role</th>
-            <th>Status</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var user in Model.Users)
-        {
-            <tr>
-                <td>@user.Fullname</td>
-                <td>@user.Email</td>
-                <td>@user.PhoneNumber</td>
-                <td>@user.Role</td>
-                <td>@user.Status</td>
-            </tr>
+@{
+    var departmentsInChunks = Model.Departments.Select((department, index) => new { department, index })
+                                               .GroupBy(x => x.index / 5)
+                                               .Select(group => group.Select(x => x.department).ToList())
+                                               .ToList();
 }
-    </tbody>
-</table>
 
-<!-- Pagination Controls -->
-<nav>
-    <ul class="pagination">
-        @if (Model.Users.HasPreviousPage)
-        {
-            <li class="page-item">
-                <a class="page-link" asp-page="./Users" asp-route-PageIndex="@(Model.PageIndex - 1)"
-                   asp-route-Search="@Model.Search" asp-route-Role="@Model.Role"
-                   asp-route-Status="@Model.Status" asp-route-SortBy="@Model.SortBy"
-                   asp-route-IsDescending="@Model.IsDescending">Previous</a>
-            </li>
-        }
-        @if (Model.Users.HasNextPage)
-        {
-            <li class="page-item">
-                <a class="page-link" asp-page="./Users" asp-route-PageIndex="@(Model.PageIndex + 1)"
-                   asp-route-Search="@Model.Search" asp-route-Role="@Model.Role"
-                   asp-route-Status="@Model.Status" asp-route-SortBy="@Model.SortBy"
-                   asp-route-IsDescending="@Model.IsDescending">Next</a>
-            </li>
-        }
-    </ul>
-</nav>
+<!-- Intro -->
+<div class="intro">
+    <div class="container">
+        <div class="intro-text">
+            <h1>Cần tìm cơ sở y tế gần nhất? <br><span class="green pt-2">Chúng tôi luôn ở đây để hỗ trợ bạn.</span></h1>
+            <div class="check-out">
+                <div class="form">
+                    <div class="medic-search">
+                        <i class="fas fa-search green" style="font-size: 25px; margin-right: 10px;"></i>
+                        <input type="text" placeholder="Nhập khoa bạn cần tìm" class="search-input">
+                    </div>
+                    <form method="post" >
+                        <div class="d-flex justify-content-between align-items-center">
+                            <label class="w-50" for="provinceCode">Địa điểm:</label>
+                            <select asp-for="SelectedProvinceCode" class="form-control" asp-items="@(new SelectList(Model.Provinces, "Code", "Name"))">
+                                <option value="">Chọn tỉnh/thành</option>
+                            </select>
+                            <input class="search-btn" type="submit" value="Search">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Search by category-->
+<div class="container mb-5 mt-5">
+    <div class="search-by">
+        <h1>Tìm kiếm theo <span class="green">khoa khám bệnh</span></h1>
+
+        <!--Start carousel-->
+        <div id="departmentCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                @foreach (var chunk in departmentsInChunks)
+                {
+                    <div class="carousel-item @(chunk == departmentsInChunks.First() ? "active" : "")">
+                        <div class="row d-flex justify-content-center">
+                            @foreach (var department in chunk)
+                            {
+                                <div class="col-2">
+                                    <div class="card department-card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">@department.Name</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#departmentCarousel" data-bs-slide="prev">
+                <i class="fas fa-chevron-left"></i> 
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#departmentCarousel" data-bs-slide="next">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="container mt-5">
+    <div class="search-by">
+        <h1>Tìm kiếm theo <span class="green">loại cơ sở y tế </span></h1>
+
+        <!--Start carousel-->
+        <div class="row d-flex justify-content-center">
+            @foreach (var facilityType in Model.FacilityTypes)
+            {
+                <div class="col-2">
+                    <div class="card department-card">
+                        <div class="card-body">
+                            <h5 class="card-title">@facilityType.Name</h5>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+
+</div>
