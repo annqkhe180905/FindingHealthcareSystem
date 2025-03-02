@@ -134,69 +134,71 @@ public partial class FindingHealthcareSystemContext : DbContext
         modelBuilder.Entity<Review>()
         .Property(a => a.ProviderType)
         .HasConversion<string>();
-            //config polymorphic relationship
-            modelBuilder.Entity<Appointment>()
-                .HasOne<PrivateService>()
-                .WithMany()
-                .HasForeignKey(a => a.ServiceId)
-                .HasConstraintName("FK_Appointment_PrivateService")
-                .OnDelete(DeleteBehavior.Restrict);
+        //config polymorphic relationship
+        modelBuilder.Entity<Appointment>()
+            .HasOne<PrivateService>()
+            .WithMany()
+            .HasForeignKey(a => a.ServiceId)
+            .HasConstraintName("FK_Appointment_PrivateService")
+            .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Appointment>()
-                .HasOne<PublicService>()
-                .WithMany()
-                .HasForeignKey(a => a.ServiceId)
-                .HasConstraintName("FK_Appointment_PublicService")
-                .OnDelete(DeleteBehavior.Restrict);
+        modelBuilder.Entity<Appointment>()
+            .HasOne<PublicService>()
+            .WithMany()
+            .HasForeignKey(a => a.ServiceId)
+            .HasConstraintName("FK_Appointment_PublicService")
+            .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Appointment>()
-                .HasOne<Professional>()
-                .WithMany()
-                .HasForeignKey(a => a.ProviderId)
-                .HasConstraintName("FK_Appointment_Professional")
-                .OnDelete(DeleteBehavior.Restrict);
+        modelBuilder.Entity<Appointment>()
+            .HasOne<Professional>()
+            .WithMany()
+            .HasForeignKey(a => a.ProviderId)
+            .HasConstraintName("FK_Appointment_Professional")
+            .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Appointment>()
-                .HasOne<Facility>()
-                .WithMany()
-                .HasForeignKey(a => a.ProviderId)
-                .HasConstraintName("FK_Appointment_Facility")
-                .OnDelete(DeleteBehavior.Restrict);
+        modelBuilder.Entity<Appointment>()
+            .HasOne<Facility>()
+            .WithMany()
+            .HasForeignKey(a => a.ProviderId)
+            .HasConstraintName("FK_Appointment_Facility")
+            .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Review>()
-                .HasOne<Professional>()
-                .WithMany()
-                .HasForeignKey(a => a.ProviderId)
-                .HasConstraintName("FK_Review_Professional")
-                .OnDelete(DeleteBehavior.Restrict);
+        modelBuilder.Entity<Review>()
+            .HasOne<Professional>()
+            .WithMany()
+            .HasForeignKey(a => a.ProviderId)
+            .HasConstraintName("FK_Review_Professional")
+            .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Review>()
-                .HasOne<Facility>()
-                .WithMany()
-                .HasForeignKey(a => a.ProviderId)
-                .HasConstraintName("FK_Review_Facility")
-                .OnDelete(DeleteBehavior.Restrict);
+        modelBuilder.Entity<Review>()
+            .HasOne<Facility>()
+            .WithMany()
+            .HasForeignKey(a => a.ProviderId)
+            .HasConstraintName("FK_Review_Facility")
+            .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.ApplyConfiguration(new UserConfiguration());
-            modelBuilder.ApplyConfiguration(new DepartmentConfiguration());
-            modelBuilder.ApplyConfiguration(new FacilityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new UserConfiguration());
+        modelBuilder.ApplyConfiguration(new DepartmentConfiguration());
+        modelBuilder.ApplyConfiguration(new FacilityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new ArticleImageConfiguration());
+        modelBuilder.ApplyConfiguration(new ArticleConfiguration());
 
-            OnModelCreatingPartial(modelBuilder);
-        
+        OnModelCreatingPartial(modelBuilder);
+
     }
 
     public override int SaveChanges()
-        {
+    {
         foreach (var entry in ChangeTracker.Entries<BaseEntity>())
         {
             if (entry.State == EntityState.Added)
-        {
+            {
                 entry.Entity.CreatedAt = DateTime.UtcNow;
                 entry.Entity.UpdatedAt = DateTime.UtcNow;
             }
 
             if (entry.State == EntityState.Modified)
-        {
+            {
                 entry.Entity.UpdatedAt = DateTime.UtcNow;
             }
         }
@@ -205,17 +207,17 @@ public partial class FindingHealthcareSystemContext : DbContext
     }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-        {
+    {
         foreach (var entry in ChangeTracker.Entries<BaseEntity>())
         {
             if (entry.State == EntityState.Added)
-        {
+            {
                 entry.Entity.CreatedAt = DateTime.UtcNow;
                 entry.Entity.UpdatedAt = DateTime.UtcNow;
             }
 
             if (entry.State == EntityState.Modified)
-        {
+            {
                 entry.Entity.UpdatedAt = DateTime.UtcNow;
             }
         }
