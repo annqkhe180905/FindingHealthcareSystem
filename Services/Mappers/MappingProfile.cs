@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
+using BusinessObjects;
 using BusinessObjects.Dtos.User;
+using BusinessObjects.DTOs.Articles;
+using BusinessObjects.DTOs.Category;
 using BusinessObjects.Entities;
 using System;
 using System.Collections.Generic;
@@ -14,6 +17,8 @@ namespace Services.Mappers
         public MappingProfile()
         {
             CreateMap<User, GeneralUserDto>().ReverseMap();
+            CreateMap<Article, NewsArticleDTO>().ReverseMap();
+            CreateMap<Category,CategoryDTO>().ReverseMap();
         }
     }
 }
