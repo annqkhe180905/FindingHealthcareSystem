@@ -4,7 +4,10 @@ using DataAccessObjects;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+using dotenv.net;
+using Services.Commons;
 
 namespace FindingHealthcareSystem
 {
@@ -20,6 +23,7 @@ namespace FindingHealthcareSystem
             builder.Services.AddDbContext<FindingHealthcareSystemContext>(o =>
             o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
             builder.Services.AddApplicationService();
+            builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("Cloudinary"));
 
             var app = builder.Build();
 

@@ -10,18 +10,13 @@ namespace BusinessObjects.DTOs.Articles
 {
     public class NewsArticleDTO
     {
-        public Guid ArticleId { get; set; }
-
-        public Guid? CategoryId { get; set; }
-
-        public string? Title { get; set; }
-
-        public DateTime? CreatedAt { get; set; }
-
-        public string? CreatedBy { get; set; }
-
-        public string? Content { get; set; }
-
-        public virtual CategoryDTO? Category { get; set; }
+        public int Id { get; set; } // ID của bài viết
+        public int? CategoryId { get; set; } // ID của chuyên mục
+        public string? CategoryName { get; set; } // Tên chuyên mục (để hiển thị)
+        public string? Title { get; set; } // Tiêu đề bài viết
+        public string? Content { get; set; } // Nội dung bài viết
+        public DateTime? CreatedAt { get; set; } // Ngày tạo bài viết
+        public int? CreatedById { get; set; } // ID của người tạo bài viết
+        public string? CreatedByName { get; set; } // Tên người tạo (để hiển thị)
     }
 }
