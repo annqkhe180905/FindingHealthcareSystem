@@ -16,8 +16,13 @@ namespace DataAccessObjects.Configurations
         {
             builder.HasKey(e => e.Id);
 
+            builder.HasMany(d => d.FacilityDepartments)
+               .WithOne(fd => fd.Department)
+               .HasForeignKey(fd => fd.DepartmentId)
+               .OnDelete(DeleteBehavior.Cascade);
+
             builder.HasData(
-           new Department
+            new Department
            {
                Id = 1,
                Name = "Khoa Nội",
