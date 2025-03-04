@@ -87,6 +87,10 @@ public partial class FindingHealthcareSystemContext : DbContext
                 modelBuilder.Entity(entityType.ClrType)
                     .Property(nameof(BaseEntity.UpdatedAt))
                     .HasDefaultValueSql("GETUTCDATE()");
+
+                modelBuilder.Entity(entityType.ClrType)
+                   .Property(nameof(BaseEntity.IsDeleted))
+                   .HasDefaultValue(false);
             }
         }
 
@@ -212,6 +216,8 @@ public partial class FindingHealthcareSystemContext : DbContext
             {
                 entry.Entity.CreatedAt = DateTime.UtcNow;
                 entry.Entity.UpdatedAt = DateTime.UtcNow;
+                entry.Entity.IsDeleted = false;
+
             }
 
             if (entry.State == EntityState.Modified)
@@ -231,6 +237,8 @@ public partial class FindingHealthcareSystemContext : DbContext
             {
                 entry.Entity.CreatedAt = DateTime.UtcNow;
                 entry.Entity.UpdatedAt = DateTime.UtcNow;
+                entry.Entity.IsDeleted = false;
+
             }
 
             if (entry.State == EntityState.Modified)
