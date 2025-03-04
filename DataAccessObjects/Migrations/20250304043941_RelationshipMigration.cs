@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccessObjects.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class RelationshipMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -175,7 +175,8 @@ namespace DataAccessObjects.Migrations
                         name: "FK_Facilities_FacilityTypes_TypeId",
                         column: x => x.TypeId,
                         principalTable: "FacilityTypes",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -198,12 +199,14 @@ namespace DataAccessObjects.Migrations
                         name: "FK_Articles_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
                     table.ForeignKey(
                         name: "FK_Articles_Users_CreatedById",
                         column: x => x.CreatedById,
                         principalTable: "Users",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -224,7 +227,8 @@ namespace DataAccessObjects.Migrations
                         name: "FK_Patients_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -243,6 +247,7 @@ namespace DataAccessObjects.Migrations
                     Experience = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     WorkingHours = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RequestStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ExpertiseId1 = table.Column<int>(type: "int", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()"),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()")
                 },
@@ -253,12 +258,19 @@ namespace DataAccessObjects.Migrations
                         name: "FK_Professionals_Expertises_ExpertiseId",
                         column: x => x.ExpertiseId,
                         principalTable: "Expertises",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
+                    table.ForeignKey(
+                        name: "FK_Professionals_Expertises_ExpertiseId1",
+                        column: x => x.ExpertiseId1,
+                        principalTable: "Expertises",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Professionals_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -279,12 +291,14 @@ namespace DataAccessObjects.Migrations
                         name: "FK_FacilityDepartments_Departments_DepartmentId",
                         column: x => x.DepartmentId,
                         principalTable: "Departments",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_FacilityDepartments_Facilities_FacilityId",
                         column: x => x.FacilityId,
                         principalTable: "Facilities",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -307,7 +321,30 @@ namespace DataAccessObjects.Migrations
                         name: "FK_PublicServices_Facilities_FacilityId",
                         column: x => x.FacilityId,
                         principalTable: "Facilities",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ArticleImage",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ImgUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ArticleId = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()"),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ArticleImage", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ArticleImage_Articles_ArticleId",
+                        column: x => x.ArticleId,
+                        principalTable: "Articles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -328,12 +365,14 @@ namespace DataAccessObjects.Migrations
                         name: "FK_PatientUnderlyingDiseases_Patients_PatientId",
                         column: x => x.PatientId,
                         principalTable: "Patients",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_PatientUnderlyingDiseases_UnderlyingDiseases_UnderlyingDiseaseId",
                         column: x => x.UnderlyingDiseaseId,
                         principalTable: "UnderlyingDiseases",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -356,7 +395,8 @@ namespace DataAccessObjects.Migrations
                         name: "FK_PrivateServices_Professionals_ProfessionalId",
                         column: x => x.ProfessionalId,
                         principalTable: "Professionals",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -377,12 +417,14 @@ namespace DataAccessObjects.Migrations
                         name: "FK_ProfessionalSpecialties_Professionals_ProfessionalId",
                         column: x => x.ProfessionalId,
                         principalTable: "Professionals",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ProfessionalSpecialties_Specialties_SpecialtyId",
                         column: x => x.SpecialtyId,
                         principalTable: "Specialties",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -419,7 +461,8 @@ namespace DataAccessObjects.Migrations
                         name: "FK_Reviews_Patients_PatientId",
                         column: x => x.PatientId,
                         principalTable: "Patients",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -471,12 +514,14 @@ namespace DataAccessObjects.Migrations
                         name: "FK_Appointments_Patients_PatientId",
                         column: x => x.PatientId,
                         principalTable: "Patients",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Appointments_Payments_PaymentId",
                         column: x => x.PaymentId,
                         principalTable: "Payments",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -498,7 +543,8 @@ namespace DataAccessObjects.Migrations
                         name: "FK_MedicalRecords_Appointments_AppointmentId",
                         column: x => x.AppointmentId,
                         principalTable: "Appointments",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -519,7 +565,8 @@ namespace DataAccessObjects.Migrations
                         name: "FK_Attachments_MedicalRecords_MedicalRecordId",
                         column: x => x.MedicalRecordId,
                         principalTable: "MedicalRecords",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -532,20 +579,106 @@ namespace DataAccessObjects.Migrations
                     { 3, "Chuyên chăm sóc sức khỏe phụ nữ, mang thai, sinh nở và các vấn đề liên quan.", "Khoa Sản" },
                     { 4, "Chuyên điều trị các bệnh lý liên quan đến trẻ em và trẻ sơ sinh.", "Khoa Nhi" },
                     { 5, "Chuyên thực hiện các xét nghiệm chẩn đoán bệnh lý.", "Khoa Xét nghiệm" },
-                    { 6, "Chuyên thực hiện các kỹ thuật hình ảnh như X-quang, MRI, CT scan.", "Khoa Chẩn đoán hình ảnh" }
+                    { 6, "Chuyên thực hiện các kỹ thuật hình ảnh như X-quang, MRI, CT scan.", "Khoa Chẩn đoán hình ảnh" },
+                    { 7, "Chuyên điều trị các vấn đề về răng miệng và các bệnh lý liên quan.", "Khoa Răng Hàm Mặt" },
+                    { 8, "Chuyên khám và điều trị các bệnh lý về mắt.", "Khoa Mắt" },
+                    { 9, "Chuyên khám và điều trị các bệnh lý về tai, mũi, họng.", "Khoa Tai Mũi Họng" },
+                    { 10, "Chuyên điều trị các bệnh lý về da và thẩm mỹ.", "Khoa Da Liễu" },
+                    { 11, "Chuyên cấp cứu và điều trị các bệnh nhân trong tình trạng khẩn cấp.", "Khoa Cấp cứu" },
+                    { 12, "Chuyên theo dõi và điều trị bệnh nhân trong tình trạng nguy kịch.", "Khoa Hồi sức tích cực" },
+                    { 13, "Chuyên điều trị các vấn đề liên quan đến tâm lý, stress và trầm cảm.", "Khoa Tâm lý" },
+                    { 14, "Chuyên phục hồi chức năng cho bệnh nhân sau tai nạn hoặc phẫu thuật.", "Khoa Phục hồi chức năng" },
+                    { 15, "Chuyên điều trị các bệnh lý liên quan đến hệ tiết niệu và thận.", "Khoa Tiết niệu" },
+                    { 16, "Chuyên điều trị các bệnh lý về tim và mạch máu.", "Khoa Tim mạch" },
+                    { 17, "Chuyên điều trị các bệnh lý liên quan đến hệ hô hấp như phổi và khí quản.", "Khoa Hô hấp" },
+                    { 18, "Chuyên điều trị các bệnh lý về nội tiết như tiểu đường, tuyến giáp.", "Khoa Nội tiết" },
+                    { 19, "Chuyên điều trị các bệnh lý ung thư và các bệnh lý ác tính.", "Khoa Ung bướu" },
+                    { 20, "Chuyên tư vấn và điều trị các vấn đề liên quan đến dinh dưỡng.", "Khoa Dinh dưỡng" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Expertises",
+                columns: new[] { "Id", "Description", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Tốt nghiệp đại học Y khoa hệ chính quy (6 năm).", "Bác sĩ đa khoa" },
+                    { 2, "Tốt nghiệp đại học Y học cổ truyền (6 năm).", "Bác sĩ y học cổ truyền" },
+                    { 3, "Tốt nghiệp đại học chuyên khoa Răng - Hàm - Mặt (6 năm).", "Bác sĩ Răng - Hàm - Mặt" },
+                    { 4, "Tốt nghiệp đại học chuyên ngành Y học dự phòng (6 năm).", "Bác sĩ Y học dự phòng" },
+                    { 5, "Tốt nghiệp đại học ngành Dược (5 năm).", "Dược sĩ đại học" },
+                    { 6, "Tốt nghiệp đại học ngành Điều dưỡng (4 năm).", "Cử nhân Điều dưỡng" },
+                    { 7, "Đào tạo chuyên sâu 3 năm sau khi tốt nghiệp bác sĩ đa khoa.", "Bác sĩ nội trú" },
+                    { 8, "Đào tạo sau đại học chuyên sâu trong lĩnh vực y khoa (2 năm).", "Bác sĩ chuyên khoa I" },
+                    { 9, "Cấp cao hơn chuyên khoa I, đào tạo tiếp 2-3 năm.", "Bác sĩ chuyên khoa II" },
+                    { 10, "Học vị thạc sĩ ngành y khoa (2 năm).", "Thạc sĩ Y khoa" },
+                    { 11, "Học vị tiến sĩ y học, chuyên sâu nghiên cứu (3-5 năm).", "Tiến sĩ Y khoa" },
+                    { 12, "Học hàm Phó Giáo sư, có nhiều nghiên cứu và đóng góp khoa học.", "Phó Giáo sư - Tiến sĩ" },
+                    { 13, "Học hàm Giáo sư, chuyên gia đầu ngành y tế.", "Giáo sư - Tiến sĩ" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "FacilityTypes",
+                columns: new[] { "Id", "Description", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Cơ sở y tế chuyên điều trị các bệnh lý đa dạng.", "Bệnh viện" },
+                    { 2, "Cơ sở y tế nhỏ, chủ yếu khám chữa bệnh ngoại trú.", "Phòng khám" },
+                    { 3, "Cửa hàng cung cấp thuốc và các sản phẩm y tế.", "Nhà thuốc" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Specialties",
+                columns: new[] { "Id", "Description", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Chuyên ngành điều trị các bệnh lý nội bộ của cơ thể như bệnh tim mạch, tiêu hóa, hô hấp, thận.", "Chuyên khoa Nội" },
+                    { 2, "Chuyên ngành liên quan đến phẫu thuật và điều trị các bệnh lý cần can thiệp phẫu thuật.", "Chuyên khoa Ngoại" },
+                    { 3, "Chuyên ngành chuyên sâu về bệnh lý tim mạch, bao gồm các bệnh liên quan đến tim và mạch máu.", "Chuyên khoa Tim mạch" },
+                    { 4, "Chuyên ngành chẩn đoán và điều trị các bệnh liên quan đến hệ thần kinh như đột quỵ, động kinh.", "Chuyên khoa Thần kinh" },
+                    { 5, "Chuyên ngành chăm sóc và điều trị các bệnh lý về da như mụn, eczema, bệnh vảy nến.", "Chuyên khoa Da liễu" },
+                    { 6, "Chuyên ngành điều trị các bệnh lý liên quan đến hệ sinh sản và chăm sóc sức khỏe phụ nữ.", "Chuyên khoa Sản phụ khoa" },
+                    { 7, "Chuyên ngành chăm sóc sức khỏe và điều trị bệnh lý cho trẻ em.", "Chuyên khoa Nhi" },
+                    { 8, "Chuyên ngành điều trị và quản lý các bệnh lý ung thư.", "Chuyên khoa Ung bướu" },
+                    { 9, "Chuyên ngành điều trị và chăm sóc các bệnh lý về mắt, bao gồm đục thủy tinh thể, tật khúc xạ.", "Chuyên khoa Mắt" },
+                    { 10, "Chuyên ngành liên quan đến các bệnh lý tai, mũi, họng và các cấu trúc liên quan.", "Chuyên khoa Tai Mũi Họng" },
+                    { 11, "Chuyên ngành tập trung vào phục hồi sức khỏe cho bệnh nhân sau phẫu thuật, tai nạn, hoặc các bệnh lý nghiêm trọng.", "Chuyên khoa Phục hồi chức năng" },
+                    { 12, "Chuyên ngành sử dụng các phương pháp y học cổ truyền như châm cứu, bấm huyệt để điều trị bệnh.", "Chuyên khoa Y học cổ truyền" },
+                    { 13, "Chuyên ngành nghiên cứu và điều trị các bệnh lý về hô hấp như viêm phổi, hen suyễn.", "Chuyên khoa Hô hấp" },
+                    { 14, "Chuyên ngành điều trị các bệnh lý liên quan đến nội tiết tố như tiểu đường, rối loạn tuyến giáp.", "Chuyên khoa Nội tiết" },
+                    { 15, "Chuyên ngành chăm sóc sức khỏe răng miệng, bao gồm điều trị sâu răng, chỉnh hình răng miệng.", "Chuyên khoa Nha khoa" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "UnderlyingDiseases",
+                columns: new[] { "Id", "Description", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Bệnh lý do rối loạn chuyển hóa đường trong máu", "Tiểu đường" },
+                    { 2, "Tăng huyết áp có thể gây nguy cơ bệnh tim mạch", "Huyết áp cao" },
+                    { 3, "Bệnh đường hô hấp mãn tính gây khó thở", "Hen suyễn" },
+                    { 4, "Tình trạng mỡ thừa tích tụ quá mức gây ảnh hưởng sức khỏe", "Béo phì" },
+                    { 5, "Tình trạng tim không bơm đủ máu đến cơ thể", "Suy tim" },
+                    { 6, "Suy giảm chức năng thận ảnh hưởng đến bài tiết và lọc độc tố", "Suy thận" },
+                    { 7, "Bệnh mãn tính gây khó thở, thường gặp ở người hút thuốc lá", "Bệnh phổi tắc nghẽn mãn tính (COPD)" },
+                    { 8, "Suy giảm mật độ xương làm tăng nguy cơ gãy xương", "Loãng xương" },
+                    { 9, "Rối loạn thần kinh ảnh hưởng đến vận động", "Bệnh Parkinson" },
+                    { 10, "Bệnh thoái hóa thần kinh ảnh hưởng đến trí nhớ và nhận thức", "Bệnh Alzheimer" },
+                    { 11, "Bệnh nhiễm virus viêm gan B gây tổn thương gan", "Viêm gan B" },
+                    { 12, "Bệnh nhiễm virus viêm gan C có thể gây xơ gan", "Viêm gan C" },
+                    { 13, "Mỡ máu cao có thể dẫn đến xơ vữa động mạch", "Rối loạn lipid máu" },
+                    { 14, "Tắc nghẽn hoặc vỡ mạch máu não gây tổn thương não", "Đột quỵ" },
+                    { 15, "Viêm loét dạ dày hoặc trào ngược dạ dày thực quản", "Bệnh dạ dày - tá tràng" },
+                    { 16, "Giảm khả năng đề kháng với bệnh tật", "Suy giảm miễn dịch" },
+                    { 17, "Bệnh tự miễn ảnh hưởng nhiều cơ quan trong cơ thể", "Bệnh Lupus ban đỏ hệ thống" },
+                    { 18, "Bệnh không dung nạp gluten gây tổn thương ruột non", "Bệnh Celiac" },
+                    { 19, "Suy giảm miễn dịch gây nguy cơ nhiễm trùng cao", "HIV/AIDS" },
+                    { 20, "Bệnh do rối loạn chuyển hóa purin, gây viêm khớp", "Bệnh gút" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Birthday", "Email", "Fullname", "Gender", "Password", "PhoneNumber", "Role", "Status" },
-                values: new object[,]
-                {
-                    { 1, new DateOnly(1990, 5, 10), "john.doe@example.com", "John Doe", "Male", "admin123", "0123456789", "Admin", "Active" },
-                    { 2, new DateOnly(1995, 8, 15), "jane.smith@example.com", "Jane Smith", "Female", "user123", "0987654321", "Professional", "Active" },
-                    { 3, new DateOnly(2000, 3, 22), "alice.johnson@example.com", "Alice Johnson", "Female", "password789", "0112233445", "Patient", "Inactive" },
-                    { 4, new DateOnly(1992, 7, 5), "bob.williams@example.com", "Bob Williams", "Male", "securepass", "0223344556", "Patient", "Active" },
-                    { 5, new DateOnly(1988, 11, 30), "eve.adams@example.com", "Eve Adams", "Female", "mypassword", "0334455667", "Patient", "Active" }
-                });
+                values: new object[] { 1, new DateOnly(1985, 2, 20), "admin@gmail.com", "Admin User", "Male", "admin123", "0987654321", "Admin", "Active" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Appointments_PatientId",
@@ -566,6 +699,11 @@ namespace DataAccessObjects.Migrations
                 name: "IX_Appointments_ServiceId",
                 table: "Appointments",
                 column: "ServiceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArticleImage_ArticleId",
+                table: "ArticleImage",
+                column: "ArticleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Articles_CategoryId",
@@ -605,7 +743,9 @@ namespace DataAccessObjects.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Patients_UserId",
                 table: "Patients",
-                column: "UserId");
+                column: "UserId",
+                unique: true,
+                filter: "[UserId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PatientUnderlyingDiseases_PatientId",
@@ -626,6 +766,11 @@ namespace DataAccessObjects.Migrations
                 name: "IX_Professionals_ExpertiseId",
                 table: "Professionals",
                 column: "ExpertiseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Professionals_ExpertiseId1",
+                table: "Professionals",
+                column: "ExpertiseId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Professionals_UserId",
@@ -664,7 +809,7 @@ namespace DataAccessObjects.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Articles");
+                name: "ArticleImage");
 
             migrationBuilder.DropTable(
                 name: "Attachments");
@@ -682,7 +827,7 @@ namespace DataAccessObjects.Migrations
                 name: "Reviews");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "Articles");
 
             migrationBuilder.DropTable(
                 name: "MedicalRecords");
@@ -695,6 +840,9 @@ namespace DataAccessObjects.Migrations
 
             migrationBuilder.DropTable(
                 name: "Specialties");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "Appointments");

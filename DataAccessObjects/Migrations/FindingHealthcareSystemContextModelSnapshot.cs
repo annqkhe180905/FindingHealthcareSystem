@@ -94,9 +94,6 @@ namespace DataAccessObjects.Migrations
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CategoryId1")
-                        .HasColumnType("int");
-
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
@@ -116,18 +113,11 @@ namespace DataAccessObjects.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GETUTCDATE()");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("CategoryId1");
-
                     b.HasIndex("CreatedById");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Articles");
                 });
@@ -135,6 +125,12 @@ namespace DataAccessObjects.Migrations
             modelBuilder.Entity("BusinessObjects.Entities.ArticleImage", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ArticleId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
@@ -152,6 +148,8 @@ namespace DataAccessObjects.Migrations
                         .HasDefaultValueSql("GETUTCDATE()");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ArticleId");
 
                     b.ToTable("ArticleImage");
                 });
@@ -434,6 +432,112 @@ namespace DataAccessObjects.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Expertises");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Tốt nghiệp đại học Y khoa hệ chính quy (6 năm).",
+                            Name = "Bác sĩ đa khoa",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Tốt nghiệp đại học Y học cổ truyền (6 năm).",
+                            Name = "Bác sĩ y học cổ truyền",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Tốt nghiệp đại học chuyên khoa Răng - Hàm - Mặt (6 năm).",
+                            Name = "Bác sĩ Răng - Hàm - Mặt",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Tốt nghiệp đại học chuyên ngành Y học dự phòng (6 năm).",
+                            Name = "Bác sĩ Y học dự phòng",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Tốt nghiệp đại học ngành Dược (5 năm).",
+                            Name = "Dược sĩ đại học",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Tốt nghiệp đại học ngành Điều dưỡng (4 năm).",
+                            Name = "Cử nhân Điều dưỡng",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Đào tạo chuyên sâu 3 năm sau khi tốt nghiệp bác sĩ đa khoa.",
+                            Name = "Bác sĩ nội trú",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Đào tạo sau đại học chuyên sâu trong lĩnh vực y khoa (2 năm).",
+                            Name = "Bác sĩ chuyên khoa I",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Cấp cao hơn chuyên khoa I, đào tạo tiếp 2-3 năm.",
+                            Name = "Bác sĩ chuyên khoa II",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Học vị thạc sĩ ngành y khoa (2 năm).",
+                            Name = "Thạc sĩ Y khoa",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Học vị tiến sĩ y học, chuyên sâu nghiên cứu (3-5 năm).",
+                            Name = "Tiến sĩ Y khoa",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Học hàm Phó Giáo sư, có nhiều nghiên cứu và đóng góp khoa học.",
+                            Name = "Phó Giáo sư - Tiến sĩ",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Học hàm Giáo sư, chuyên gia đầu ngành y tế.",
+                            Name = "Giáo sư - Tiến sĩ",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("BusinessObjects.Entities.Facility", b =>
@@ -637,7 +741,9 @@ namespace DataAccessObjects.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Patients");
                 });
@@ -782,6 +888,9 @@ namespace DataAccessObjects.Migrations
                     b.Property<int?>("ExpertiseId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ExpertiseId1")
+                        .HasColumnType("int");
+
                     b.Property<string>("Province")
                         .HasColumnType("nvarchar(max)");
 
@@ -803,6 +912,8 @@ namespace DataAccessObjects.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ExpertiseId");
+
+                    b.HasIndex("ExpertiseId1");
 
                     b.HasIndex("UserId")
                         .IsUnique()
@@ -954,6 +1065,128 @@ namespace DataAccessObjects.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Specialties");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Chuyên ngành điều trị các bệnh lý nội bộ của cơ thể như bệnh tim mạch, tiêu hóa, hô hấp, thận.",
+                            Name = "Chuyên khoa Nội",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Chuyên ngành liên quan đến phẫu thuật và điều trị các bệnh lý cần can thiệp phẫu thuật.",
+                            Name = "Chuyên khoa Ngoại",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Chuyên ngành chuyên sâu về bệnh lý tim mạch, bao gồm các bệnh liên quan đến tim và mạch máu.",
+                            Name = "Chuyên khoa Tim mạch",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Chuyên ngành chẩn đoán và điều trị các bệnh liên quan đến hệ thần kinh như đột quỵ, động kinh.",
+                            Name = "Chuyên khoa Thần kinh",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Chuyên ngành chăm sóc và điều trị các bệnh lý về da như mụn, eczema, bệnh vảy nến.",
+                            Name = "Chuyên khoa Da liễu",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Chuyên ngành điều trị các bệnh lý liên quan đến hệ sinh sản và chăm sóc sức khỏe phụ nữ.",
+                            Name = "Chuyên khoa Sản phụ khoa",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Chuyên ngành chăm sóc sức khỏe và điều trị bệnh lý cho trẻ em.",
+                            Name = "Chuyên khoa Nhi",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Chuyên ngành điều trị và quản lý các bệnh lý ung thư.",
+                            Name = "Chuyên khoa Ung bướu",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Chuyên ngành điều trị và chăm sóc các bệnh lý về mắt, bao gồm đục thủy tinh thể, tật khúc xạ.",
+                            Name = "Chuyên khoa Mắt",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Chuyên ngành liên quan đến các bệnh lý tai, mũi, họng và các cấu trúc liên quan.",
+                            Name = "Chuyên khoa Tai Mũi Họng",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Chuyên ngành tập trung vào phục hồi sức khỏe cho bệnh nhân sau phẫu thuật, tai nạn, hoặc các bệnh lý nghiêm trọng.",
+                            Name = "Chuyên khoa Phục hồi chức năng",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Chuyên ngành sử dụng các phương pháp y học cổ truyền như châm cứu, bấm huyệt để điều trị bệnh.",
+                            Name = "Chuyên khoa Y học cổ truyền",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Chuyên ngành nghiên cứu và điều trị các bệnh lý về hô hấp như viêm phổi, hen suyễn.",
+                            Name = "Chuyên khoa Hô hấp",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 14,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Chuyên ngành điều trị các bệnh lý liên quan đến nội tiết tố như tiểu đường, rối loạn tuyến giáp.",
+                            Name = "Chuyên khoa Nội tiết",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 15,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Chuyên ngành chăm sóc sức khỏe răng miệng, bao gồm điều trị sâu răng, chỉnh hình răng miệng.",
+                            Name = "Chuyên khoa Nha khoa",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("BusinessObjects.Entities.UnderlyingDisease", b =>
@@ -983,6 +1216,168 @@ namespace DataAccessObjects.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("UnderlyingDiseases");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Bệnh lý do rối loạn chuyển hóa đường trong máu",
+                            Name = "Tiểu đường",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Tăng huyết áp có thể gây nguy cơ bệnh tim mạch",
+                            Name = "Huyết áp cao",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Bệnh đường hô hấp mãn tính gây khó thở",
+                            Name = "Hen suyễn",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Tình trạng mỡ thừa tích tụ quá mức gây ảnh hưởng sức khỏe",
+                            Name = "Béo phì",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Tình trạng tim không bơm đủ máu đến cơ thể",
+                            Name = "Suy tim",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Suy giảm chức năng thận ảnh hưởng đến bài tiết và lọc độc tố",
+                            Name = "Suy thận",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Bệnh mãn tính gây khó thở, thường gặp ở người hút thuốc lá",
+                            Name = "Bệnh phổi tắc nghẽn mãn tính (COPD)",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Suy giảm mật độ xương làm tăng nguy cơ gãy xương",
+                            Name = "Loãng xương",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Rối loạn thần kinh ảnh hưởng đến vận động",
+                            Name = "Bệnh Parkinson",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Bệnh thoái hóa thần kinh ảnh hưởng đến trí nhớ và nhận thức",
+                            Name = "Bệnh Alzheimer",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Bệnh nhiễm virus viêm gan B gây tổn thương gan",
+                            Name = "Viêm gan B",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Bệnh nhiễm virus viêm gan C có thể gây xơ gan",
+                            Name = "Viêm gan C",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Mỡ máu cao có thể dẫn đến xơ vữa động mạch",
+                            Name = "Rối loạn lipid máu",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 14,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Tắc nghẽn hoặc vỡ mạch máu não gây tổn thương não",
+                            Name = "Đột quỵ",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 15,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Viêm loét dạ dày hoặc trào ngược dạ dày thực quản",
+                            Name = "Bệnh dạ dày - tá tràng",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 16,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Giảm khả năng đề kháng với bệnh tật",
+                            Name = "Suy giảm miễn dịch",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 17,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Bệnh tự miễn ảnh hưởng nhiều cơ quan trong cơ thể",
+                            Name = "Bệnh Lupus ban đỏ hệ thống",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 18,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Bệnh không dung nạp gluten gây tổn thương ruột non",
+                            Name = "Bệnh Celiac",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 19,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Suy giảm miễn dịch gây nguy cơ nhiễm trùng cao",
+                            Name = "HIV/AIDS",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 20,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Bệnh do rối loạn chuyển hóa purin, gây viêm khớp",
+                            Name = "Bệnh gút",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("BusinessObjects.Entities.User", b =>
@@ -1037,70 +1432,14 @@ namespace DataAccessObjects.Migrations
                         new
                         {
                             Id = 1,
-                            Birthday = new DateOnly(1990, 5, 10),
+                            Birthday = new DateOnly(1985, 2, 20),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "john.doe@example.com",
-                            Fullname = "John Doe",
+                            Email = "admin@gmail.com",
+                            Fullname = "Admin User",
                             Gender = "Male",
                             Password = "admin123",
-                            PhoneNumber = "0123456789",
-                            Role = "Admin",
-                            Status = "Active",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Birthday = new DateOnly(1995, 8, 15),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "jane.smith@example.com",
-                            Fullname = "Jane Smith",
-                            Gender = "Female",
-                            Password = "user123",
                             PhoneNumber = "0987654321",
-                            Role = "Professional",
-                            Status = "Active",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Birthday = new DateOnly(2000, 3, 22),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "alice.johnson@example.com",
-                            Fullname = "Alice Johnson",
-                            Gender = "Female",
-                            Password = "password789",
-                            PhoneNumber = "0112233445",
-                            Role = "Patient",
-                            Status = "Inactive",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Birthday = new DateOnly(1992, 7, 5),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "bob.williams@example.com",
-                            Fullname = "Bob Williams",
-                            Gender = "Male",
-                            Password = "securepass",
-                            PhoneNumber = "0223344556",
-                            Role = "Patient",
-                            Status = "Active",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Birthday = new DateOnly(1988, 11, 30),
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "eve.adams@example.com",
-                            Fullname = "Eve Adams",
-                            Gender = "Female",
-                            Password = "mypassword",
-                            PhoneNumber = "0334455667",
-                            Role = "Patient",
+                            Role = "Admin",
                             Status = "Active",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -1110,11 +1449,13 @@ namespace DataAccessObjects.Migrations
                 {
                     b.HasOne("BusinessObjects.Entities.Patient", "Patient")
                         .WithMany("Appointments")
-                        .HasForeignKey("PatientId");
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("BusinessObjects.Entities.Payment", "Payment")
                         .WithMany("Appointments")
-                        .HasForeignKey("PaymentId");
+                        .HasForeignKey("PaymentId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("BusinessObjects.Entities.Facility", null)
                         .WithMany()
@@ -1148,22 +1489,14 @@ namespace DataAccessObjects.Migrations
             modelBuilder.Entity("BusinessObjects.Entities.Article", b =>
                 {
                     b.HasOne("BusinessObjects.Entities.Category", "Category")
-                        .WithMany()
+                        .WithMany("Articles")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("BusinessObjects.Entities.Category", null)
-                        .WithMany("Articles")
-                        .HasForeignKey("CategoryId1");
-
                     b.HasOne("BusinessObjects.Entities.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.HasOne("BusinessObjects.Entities.User", null)
                         .WithMany("Articles")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Category");
 
@@ -1172,18 +1505,21 @@ namespace DataAccessObjects.Migrations
 
             modelBuilder.Entity("BusinessObjects.Entities.ArticleImage", b =>
                 {
-                    b.HasOne("BusinessObjects.Entities.Article", null)
+                    b.HasOne("BusinessObjects.Entities.Article", "Article")
                         .WithMany("ArticleImages")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("ArticleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Article");
                 });
 
             modelBuilder.Entity("BusinessObjects.Entities.Attachment", b =>
                 {
                     b.HasOne("BusinessObjects.Entities.MedicalRecord", "MedicalRecord")
                         .WithMany("Attachments")
-                        .HasForeignKey("MedicalRecordId");
+                        .HasForeignKey("MedicalRecordId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("MedicalRecord");
                 });
@@ -1192,7 +1528,8 @@ namespace DataAccessObjects.Migrations
                 {
                     b.HasOne("BusinessObjects.Entities.FacilityType", "Type")
                         .WithMany("Facilities")
-                        .HasForeignKey("TypeId");
+                        .HasForeignKey("TypeId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Type");
                 });
@@ -1201,11 +1538,13 @@ namespace DataAccessObjects.Migrations
                 {
                     b.HasOne("BusinessObjects.Entities.Department", "Department")
                         .WithMany("FacilityDepartments")
-                        .HasForeignKey("DepartmentId");
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("BusinessObjects.Entities.Facility", "Facility")
                         .WithMany("FacilityDepartments")
-                        .HasForeignKey("FacilityId");
+                        .HasForeignKey("FacilityId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Department");
 
@@ -1216,7 +1555,8 @@ namespace DataAccessObjects.Migrations
                 {
                     b.HasOne("BusinessObjects.Entities.Appointment", "Appointment")
                         .WithMany("MedicalRecords")
-                        .HasForeignKey("AppointmentId");
+                        .HasForeignKey("AppointmentId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Appointment");
                 });
@@ -1224,8 +1564,9 @@ namespace DataAccessObjects.Migrations
             modelBuilder.Entity("BusinessObjects.Entities.Patient", b =>
                 {
                     b.HasOne("BusinessObjects.Entities.User", "User")
-                        .WithMany("Patients")
-                        .HasForeignKey("UserId");
+                        .WithOne("Patient")
+                        .HasForeignKey("BusinessObjects.Entities.Patient", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("User");
                 });
@@ -1234,11 +1575,13 @@ namespace DataAccessObjects.Migrations
                 {
                     b.HasOne("BusinessObjects.Entities.Patient", "Patient")
                         .WithMany("PatientUnderlyingDiseases")
-                        .HasForeignKey("PatientId");
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("BusinessObjects.Entities.UnderlyingDisease", "UnderlyingDisease")
                         .WithMany("PatientUnderlyingDiseases")
-                        .HasForeignKey("UnderlyingDiseaseId");
+                        .HasForeignKey("UnderlyingDiseaseId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Patient");
 
@@ -1249,7 +1592,8 @@ namespace DataAccessObjects.Migrations
                 {
                     b.HasOne("BusinessObjects.Entities.Professional", "Professional")
                         .WithMany("PrivateServices")
-                        .HasForeignKey("ProfessionalId");
+                        .HasForeignKey("ProfessionalId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Professional");
                 });
@@ -1257,12 +1601,18 @@ namespace DataAccessObjects.Migrations
             modelBuilder.Entity("BusinessObjects.Entities.Professional", b =>
                 {
                     b.HasOne("BusinessObjects.Entities.Expertise", "Expertise")
+                        .WithMany()
+                        .HasForeignKey("ExpertiseId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("BusinessObjects.Entities.Expertise", null)
                         .WithMany("Professionals")
-                        .HasForeignKey("ExpertiseId");
+                        .HasForeignKey("ExpertiseId1");
 
                     b.HasOne("BusinessObjects.Entities.User", "User")
                         .WithOne("Professional")
-                        .HasForeignKey("BusinessObjects.Entities.Professional", "UserId");
+                        .HasForeignKey("BusinessObjects.Entities.Professional", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Expertise");
 
@@ -1273,11 +1623,13 @@ namespace DataAccessObjects.Migrations
                 {
                     b.HasOne("BusinessObjects.Entities.Professional", "Professional")
                         .WithMany("ProfessionalSpecialties")
-                        .HasForeignKey("ProfessionalId");
+                        .HasForeignKey("ProfessionalId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("BusinessObjects.Entities.Specialty", "Specialty")
                         .WithMany("ProfessionalSpecialties")
-                        .HasForeignKey("SpecialtyId");
+                        .HasForeignKey("SpecialtyId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Professional");
 
@@ -1288,7 +1640,8 @@ namespace DataAccessObjects.Migrations
                 {
                     b.HasOne("BusinessObjects.Entities.Facility", "Facility")
                         .WithMany("PublicServices")
-                        .HasForeignKey("FacilityId");
+                        .HasForeignKey("FacilityId")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Facility");
                 });
@@ -1297,7 +1650,8 @@ namespace DataAccessObjects.Migrations
                 {
                     b.HasOne("BusinessObjects.Entities.Patient", "Patient")
                         .WithMany("Reviews")
-                        .HasForeignKey("PatientId");
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("BusinessObjects.Entities.Facility", null)
                         .WithMany()
@@ -1391,7 +1745,7 @@ namespace DataAccessObjects.Migrations
                 {
                     b.Navigation("Articles");
 
-                    b.Navigation("Patients");
+                    b.Navigation("Patient");
 
                     b.Navigation("Professional");
                 });
