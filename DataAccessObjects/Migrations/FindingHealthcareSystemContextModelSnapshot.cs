@@ -41,6 +41,11 @@ namespace DataAccessObjects.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<int?>("PatientId")
                         .HasColumnType("int");
 
@@ -105,6 +110,11 @@ namespace DataAccessObjects.Migrations
                     b.Property<int?>("CreatedById")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
@@ -142,6 +152,11 @@ namespace DataAccessObjects.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
@@ -166,6 +181,11 @@ namespace DataAccessObjects.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GETUTCDATE()");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<int?>("MedicalRecordId")
                         .HasColumnType("int");
@@ -201,6 +221,11 @@ namespace DataAccessObjects.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -230,6 +255,11 @@ namespace DataAccessObjects.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -248,6 +278,7 @@ namespace DataAccessObjects.Migrations
                             Id = 1,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên điều trị các bệnh lý nội khoa như tim mạch, tiêu hóa, thần kinh.",
+                            IsDeleted = false,
                             Name = "Khoa Nội",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -256,6 +287,7 @@ namespace DataAccessObjects.Migrations
                             Id = 2,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên phẫu thuật và điều trị các bệnh lý ngoại khoa.",
+                            IsDeleted = false,
                             Name = "Khoa Ngoại",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -264,6 +296,7 @@ namespace DataAccessObjects.Migrations
                             Id = 3,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên chăm sóc sức khỏe phụ nữ, mang thai, sinh nở và các vấn đề liên quan.",
+                            IsDeleted = false,
                             Name = "Khoa Sản",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -272,6 +305,7 @@ namespace DataAccessObjects.Migrations
                             Id = 4,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên điều trị các bệnh lý liên quan đến trẻ em và trẻ sơ sinh.",
+                            IsDeleted = false,
                             Name = "Khoa Nhi",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -280,6 +314,7 @@ namespace DataAccessObjects.Migrations
                             Id = 5,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên thực hiện các xét nghiệm chẩn đoán bệnh lý.",
+                            IsDeleted = false,
                             Name = "Khoa Xét nghiệm",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -288,6 +323,7 @@ namespace DataAccessObjects.Migrations
                             Id = 6,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên thực hiện các kỹ thuật hình ảnh như X-quang, MRI, CT scan.",
+                            IsDeleted = false,
                             Name = "Khoa Chẩn đoán hình ảnh",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -296,6 +332,7 @@ namespace DataAccessObjects.Migrations
                             Id = 7,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên điều trị các vấn đề về răng miệng và các bệnh lý liên quan.",
+                            IsDeleted = false,
                             Name = "Khoa Răng Hàm Mặt",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -304,6 +341,7 @@ namespace DataAccessObjects.Migrations
                             Id = 8,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên khám và điều trị các bệnh lý về mắt.",
+                            IsDeleted = false,
                             Name = "Khoa Mắt",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -312,6 +350,7 @@ namespace DataAccessObjects.Migrations
                             Id = 9,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên khám và điều trị các bệnh lý về tai, mũi, họng.",
+                            IsDeleted = false,
                             Name = "Khoa Tai Mũi Họng",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -320,6 +359,7 @@ namespace DataAccessObjects.Migrations
                             Id = 10,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên điều trị các bệnh lý về da và thẩm mỹ.",
+                            IsDeleted = false,
                             Name = "Khoa Da Liễu",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -328,6 +368,7 @@ namespace DataAccessObjects.Migrations
                             Id = 11,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên cấp cứu và điều trị các bệnh nhân trong tình trạng khẩn cấp.",
+                            IsDeleted = false,
                             Name = "Khoa Cấp cứu",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -336,6 +377,7 @@ namespace DataAccessObjects.Migrations
                             Id = 12,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên theo dõi và điều trị bệnh nhân trong tình trạng nguy kịch.",
+                            IsDeleted = false,
                             Name = "Khoa Hồi sức tích cực",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -344,6 +386,7 @@ namespace DataAccessObjects.Migrations
                             Id = 13,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên điều trị các vấn đề liên quan đến tâm lý, stress và trầm cảm.",
+                            IsDeleted = false,
                             Name = "Khoa Tâm lý",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -352,6 +395,7 @@ namespace DataAccessObjects.Migrations
                             Id = 14,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên phục hồi chức năng cho bệnh nhân sau tai nạn hoặc phẫu thuật.",
+                            IsDeleted = false,
                             Name = "Khoa Phục hồi chức năng",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -360,6 +404,7 @@ namespace DataAccessObjects.Migrations
                             Id = 15,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên điều trị các bệnh lý liên quan đến hệ tiết niệu và thận.",
+                            IsDeleted = false,
                             Name = "Khoa Tiết niệu",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -368,6 +413,7 @@ namespace DataAccessObjects.Migrations
                             Id = 16,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên điều trị các bệnh lý về tim và mạch máu.",
+                            IsDeleted = false,
                             Name = "Khoa Tim mạch",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -376,6 +422,7 @@ namespace DataAccessObjects.Migrations
                             Id = 17,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên điều trị các bệnh lý liên quan đến hệ hô hấp như phổi và khí quản.",
+                            IsDeleted = false,
                             Name = "Khoa Hô hấp",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -384,6 +431,7 @@ namespace DataAccessObjects.Migrations
                             Id = 18,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên điều trị các bệnh lý về nội tiết như tiểu đường, tuyến giáp.",
+                            IsDeleted = false,
                             Name = "Khoa Nội tiết",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -392,6 +440,7 @@ namespace DataAccessObjects.Migrations
                             Id = 19,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên điều trị các bệnh lý ung thư và các bệnh lý ác tính.",
+                            IsDeleted = false,
                             Name = "Khoa Ung bướu",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -400,6 +449,7 @@ namespace DataAccessObjects.Migrations
                             Id = 20,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên tư vấn và điều trị các vấn đề liên quan đến dinh dưỡng.",
+                            IsDeleted = false,
                             Name = "Khoa Dinh dưỡng",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -421,6 +471,11 @@ namespace DataAccessObjects.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -439,6 +494,7 @@ namespace DataAccessObjects.Migrations
                             Id = 1,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Tốt nghiệp đại học Y khoa hệ chính quy (6 năm).",
+                            IsDeleted = false,
                             Name = "Bác sĩ đa khoa",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -447,6 +503,7 @@ namespace DataAccessObjects.Migrations
                             Id = 2,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Tốt nghiệp đại học Y học cổ truyền (6 năm).",
+                            IsDeleted = false,
                             Name = "Bác sĩ y học cổ truyền",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -455,6 +512,7 @@ namespace DataAccessObjects.Migrations
                             Id = 3,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Tốt nghiệp đại học chuyên khoa Răng - Hàm - Mặt (6 năm).",
+                            IsDeleted = false,
                             Name = "Bác sĩ Răng - Hàm - Mặt",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -463,6 +521,7 @@ namespace DataAccessObjects.Migrations
                             Id = 4,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Tốt nghiệp đại học chuyên ngành Y học dự phòng (6 năm).",
+                            IsDeleted = false,
                             Name = "Bác sĩ Y học dự phòng",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -471,6 +530,7 @@ namespace DataAccessObjects.Migrations
                             Id = 5,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Tốt nghiệp đại học ngành Dược (5 năm).",
+                            IsDeleted = false,
                             Name = "Dược sĩ đại học",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -479,6 +539,7 @@ namespace DataAccessObjects.Migrations
                             Id = 6,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Tốt nghiệp đại học ngành Điều dưỡng (4 năm).",
+                            IsDeleted = false,
                             Name = "Cử nhân Điều dưỡng",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -487,6 +548,7 @@ namespace DataAccessObjects.Migrations
                             Id = 7,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Đào tạo chuyên sâu 3 năm sau khi tốt nghiệp bác sĩ đa khoa.",
+                            IsDeleted = false,
                             Name = "Bác sĩ nội trú",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -495,6 +557,7 @@ namespace DataAccessObjects.Migrations
                             Id = 8,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Đào tạo sau đại học chuyên sâu trong lĩnh vực y khoa (2 năm).",
+                            IsDeleted = false,
                             Name = "Bác sĩ chuyên khoa I",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -503,6 +566,7 @@ namespace DataAccessObjects.Migrations
                             Id = 9,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Cấp cao hơn chuyên khoa I, đào tạo tiếp 2-3 năm.",
+                            IsDeleted = false,
                             Name = "Bác sĩ chuyên khoa II",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -511,6 +575,7 @@ namespace DataAccessObjects.Migrations
                             Id = 10,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Học vị thạc sĩ ngành y khoa (2 năm).",
+                            IsDeleted = false,
                             Name = "Thạc sĩ Y khoa",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -519,6 +584,7 @@ namespace DataAccessObjects.Migrations
                             Id = 11,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Học vị tiến sĩ y học, chuyên sâu nghiên cứu (3-5 năm).",
+                            IsDeleted = false,
                             Name = "Tiến sĩ Y khoa",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -527,6 +593,7 @@ namespace DataAccessObjects.Migrations
                             Id = 12,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Học hàm Phó Giáo sư, có nhiều nghiên cứu và đóng góp khoa học.",
+                            IsDeleted = false,
                             Name = "Phó Giáo sư - Tiến sĩ",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -535,6 +602,7 @@ namespace DataAccessObjects.Migrations
                             Id = 13,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Học hàm Giáo sư, chuyên gia đầu ngành y tế.",
+                            IsDeleted = false,
                             Name = "Giáo sư - Tiến sĩ",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -564,6 +632,11 @@ namespace DataAccessObjects.Migrations
 
                     b.Property<string>("District")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -612,6 +685,11 @@ namespace DataAccessObjects.Migrations
                     b.Property<int?>("FacilityId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
@@ -642,6 +720,11 @@ namespace DataAccessObjects.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -660,6 +743,7 @@ namespace DataAccessObjects.Migrations
                             Id = 1,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Cơ sở y tế chuyên điều trị các bệnh lý đa dạng.",
+                            IsDeleted = false,
                             Name = "Bệnh viện",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -668,6 +752,7 @@ namespace DataAccessObjects.Migrations
                             Id = 2,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Cơ sở y tế nhỏ, chủ yếu khám chữa bệnh ngoại trú.",
+                            IsDeleted = false,
                             Name = "Phòng khám",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -676,6 +761,7 @@ namespace DataAccessObjects.Migrations
                             Id = 3,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Cửa hàng cung cấp thuốc và các sản phẩm y tế.",
+                            IsDeleted = false,
                             Name = "Nhà thuốc",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -699,6 +785,11 @@ namespace DataAccessObjects.Migrations
 
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("Note")
                         .HasColumnType("nvarchar(max)");
@@ -727,6 +818,11 @@ namespace DataAccessObjects.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GETUTCDATE()");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("Note")
                         .HasColumnType("nvarchar(max)");
@@ -761,6 +857,11 @@ namespace DataAccessObjects.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GETUTCDATE()");
 
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<int?>("PatientId")
                         .HasColumnType("int");
 
@@ -793,6 +894,11 @@ namespace DataAccessObjects.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GETUTCDATE()");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<DateTime?>("PaymentDate")
                         .HasColumnType("datetime2");
@@ -835,6 +941,11 @@ namespace DataAccessObjects.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -891,6 +1002,11 @@ namespace DataAccessObjects.Migrations
                     b.Property<int?>("ExpertiseId1")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<string>("Province")
                         .HasColumnType("nvarchar(max)");
 
@@ -935,6 +1051,11 @@ namespace DataAccessObjects.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GETUTCDATE()");
 
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<int?>("ProfessionalId")
                         .HasColumnType("int");
 
@@ -974,6 +1095,11 @@ namespace DataAccessObjects.Migrations
                     b.Property<int?>("FacilityId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -1010,6 +1136,11 @@ namespace DataAccessObjects.Migrations
 
                     b.Property<DateTime?>("Date")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<int?>("PatientId")
                         .HasColumnType("int");
@@ -1054,6 +1185,11 @@ namespace DataAccessObjects.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -1072,6 +1208,7 @@ namespace DataAccessObjects.Migrations
                             Id = 1,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên ngành điều trị các bệnh lý nội bộ của cơ thể như bệnh tim mạch, tiêu hóa, hô hấp, thận.",
+                            IsDeleted = false,
                             Name = "Chuyên khoa Nội",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1080,6 +1217,7 @@ namespace DataAccessObjects.Migrations
                             Id = 2,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên ngành liên quan đến phẫu thuật và điều trị các bệnh lý cần can thiệp phẫu thuật.",
+                            IsDeleted = false,
                             Name = "Chuyên khoa Ngoại",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1088,6 +1226,7 @@ namespace DataAccessObjects.Migrations
                             Id = 3,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên ngành chuyên sâu về bệnh lý tim mạch, bao gồm các bệnh liên quan đến tim và mạch máu.",
+                            IsDeleted = false,
                             Name = "Chuyên khoa Tim mạch",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1096,6 +1235,7 @@ namespace DataAccessObjects.Migrations
                             Id = 4,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên ngành chẩn đoán và điều trị các bệnh liên quan đến hệ thần kinh như đột quỵ, động kinh.",
+                            IsDeleted = false,
                             Name = "Chuyên khoa Thần kinh",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1104,6 +1244,7 @@ namespace DataAccessObjects.Migrations
                             Id = 5,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên ngành chăm sóc và điều trị các bệnh lý về da như mụn, eczema, bệnh vảy nến.",
+                            IsDeleted = false,
                             Name = "Chuyên khoa Da liễu",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1112,6 +1253,7 @@ namespace DataAccessObjects.Migrations
                             Id = 6,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên ngành điều trị các bệnh lý liên quan đến hệ sinh sản và chăm sóc sức khỏe phụ nữ.",
+                            IsDeleted = false,
                             Name = "Chuyên khoa Sản phụ khoa",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1120,6 +1262,7 @@ namespace DataAccessObjects.Migrations
                             Id = 7,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên ngành chăm sóc sức khỏe và điều trị bệnh lý cho trẻ em.",
+                            IsDeleted = false,
                             Name = "Chuyên khoa Nhi",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1128,6 +1271,7 @@ namespace DataAccessObjects.Migrations
                             Id = 8,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên ngành điều trị và quản lý các bệnh lý ung thư.",
+                            IsDeleted = false,
                             Name = "Chuyên khoa Ung bướu",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1136,6 +1280,7 @@ namespace DataAccessObjects.Migrations
                             Id = 9,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên ngành điều trị và chăm sóc các bệnh lý về mắt, bao gồm đục thủy tinh thể, tật khúc xạ.",
+                            IsDeleted = false,
                             Name = "Chuyên khoa Mắt",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1144,6 +1289,7 @@ namespace DataAccessObjects.Migrations
                             Id = 10,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên ngành liên quan đến các bệnh lý tai, mũi, họng và các cấu trúc liên quan.",
+                            IsDeleted = false,
                             Name = "Chuyên khoa Tai Mũi Họng",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1152,6 +1298,7 @@ namespace DataAccessObjects.Migrations
                             Id = 11,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên ngành tập trung vào phục hồi sức khỏe cho bệnh nhân sau phẫu thuật, tai nạn, hoặc các bệnh lý nghiêm trọng.",
+                            IsDeleted = false,
                             Name = "Chuyên khoa Phục hồi chức năng",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1160,6 +1307,7 @@ namespace DataAccessObjects.Migrations
                             Id = 12,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên ngành sử dụng các phương pháp y học cổ truyền như châm cứu, bấm huyệt để điều trị bệnh.",
+                            IsDeleted = false,
                             Name = "Chuyên khoa Y học cổ truyền",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1168,6 +1316,7 @@ namespace DataAccessObjects.Migrations
                             Id = 13,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên ngành nghiên cứu và điều trị các bệnh lý về hô hấp như viêm phổi, hen suyễn.",
+                            IsDeleted = false,
                             Name = "Chuyên khoa Hô hấp",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1176,6 +1325,7 @@ namespace DataAccessObjects.Migrations
                             Id = 14,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên ngành điều trị các bệnh lý liên quan đến nội tiết tố như tiểu đường, rối loạn tuyến giáp.",
+                            IsDeleted = false,
                             Name = "Chuyên khoa Nội tiết",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1184,6 +1334,7 @@ namespace DataAccessObjects.Migrations
                             Id = 15,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Chuyên ngành chăm sóc sức khỏe răng miệng, bao gồm điều trị sâu răng, chỉnh hình răng miệng.",
+                            IsDeleted = false,
                             Name = "Chuyên khoa Nha khoa",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -1205,6 +1356,11 @@ namespace DataAccessObjects.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -1223,6 +1379,7 @@ namespace DataAccessObjects.Migrations
                             Id = 1,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Bệnh lý do rối loạn chuyển hóa đường trong máu",
+                            IsDeleted = false,
                             Name = "Tiểu đường",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1231,6 +1388,7 @@ namespace DataAccessObjects.Migrations
                             Id = 2,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Tăng huyết áp có thể gây nguy cơ bệnh tim mạch",
+                            IsDeleted = false,
                             Name = "Huyết áp cao",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1239,6 +1397,7 @@ namespace DataAccessObjects.Migrations
                             Id = 3,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Bệnh đường hô hấp mãn tính gây khó thở",
+                            IsDeleted = false,
                             Name = "Hen suyễn",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1247,6 +1406,7 @@ namespace DataAccessObjects.Migrations
                             Id = 4,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Tình trạng mỡ thừa tích tụ quá mức gây ảnh hưởng sức khỏe",
+                            IsDeleted = false,
                             Name = "Béo phì",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1255,6 +1415,7 @@ namespace DataAccessObjects.Migrations
                             Id = 5,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Tình trạng tim không bơm đủ máu đến cơ thể",
+                            IsDeleted = false,
                             Name = "Suy tim",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1263,6 +1424,7 @@ namespace DataAccessObjects.Migrations
                             Id = 6,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Suy giảm chức năng thận ảnh hưởng đến bài tiết và lọc độc tố",
+                            IsDeleted = false,
                             Name = "Suy thận",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1271,6 +1433,7 @@ namespace DataAccessObjects.Migrations
                             Id = 7,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Bệnh mãn tính gây khó thở, thường gặp ở người hút thuốc lá",
+                            IsDeleted = false,
                             Name = "Bệnh phổi tắc nghẽn mãn tính (COPD)",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1279,6 +1442,7 @@ namespace DataAccessObjects.Migrations
                             Id = 8,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Suy giảm mật độ xương làm tăng nguy cơ gãy xương",
+                            IsDeleted = false,
                             Name = "Loãng xương",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1287,6 +1451,7 @@ namespace DataAccessObjects.Migrations
                             Id = 9,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Rối loạn thần kinh ảnh hưởng đến vận động",
+                            IsDeleted = false,
                             Name = "Bệnh Parkinson",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1295,6 +1460,7 @@ namespace DataAccessObjects.Migrations
                             Id = 10,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Bệnh thoái hóa thần kinh ảnh hưởng đến trí nhớ và nhận thức",
+                            IsDeleted = false,
                             Name = "Bệnh Alzheimer",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1303,6 +1469,7 @@ namespace DataAccessObjects.Migrations
                             Id = 11,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Bệnh nhiễm virus viêm gan B gây tổn thương gan",
+                            IsDeleted = false,
                             Name = "Viêm gan B",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1311,6 +1478,7 @@ namespace DataAccessObjects.Migrations
                             Id = 12,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Bệnh nhiễm virus viêm gan C có thể gây xơ gan",
+                            IsDeleted = false,
                             Name = "Viêm gan C",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1319,6 +1487,7 @@ namespace DataAccessObjects.Migrations
                             Id = 13,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Mỡ máu cao có thể dẫn đến xơ vữa động mạch",
+                            IsDeleted = false,
                             Name = "Rối loạn lipid máu",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1327,6 +1496,7 @@ namespace DataAccessObjects.Migrations
                             Id = 14,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Tắc nghẽn hoặc vỡ mạch máu não gây tổn thương não",
+                            IsDeleted = false,
                             Name = "Đột quỵ",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1335,6 +1505,7 @@ namespace DataAccessObjects.Migrations
                             Id = 15,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Viêm loét dạ dày hoặc trào ngược dạ dày thực quản",
+                            IsDeleted = false,
                             Name = "Bệnh dạ dày - tá tràng",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1343,6 +1514,7 @@ namespace DataAccessObjects.Migrations
                             Id = 16,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Giảm khả năng đề kháng với bệnh tật",
+                            IsDeleted = false,
                             Name = "Suy giảm miễn dịch",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1351,6 +1523,7 @@ namespace DataAccessObjects.Migrations
                             Id = 17,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Bệnh tự miễn ảnh hưởng nhiều cơ quan trong cơ thể",
+                            IsDeleted = false,
                             Name = "Bệnh Lupus ban đỏ hệ thống",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1359,6 +1532,7 @@ namespace DataAccessObjects.Migrations
                             Id = 18,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Bệnh không dung nạp gluten gây tổn thương ruột non",
+                            IsDeleted = false,
                             Name = "Bệnh Celiac",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1367,6 +1541,7 @@ namespace DataAccessObjects.Migrations
                             Id = 19,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Suy giảm miễn dịch gây nguy cơ nhiễm trùng cao",
+                            IsDeleted = false,
                             Name = "HIV/AIDS",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         },
@@ -1375,6 +1550,7 @@ namespace DataAccessObjects.Migrations
                             Id = 20,
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Bệnh do rối loạn chuyển hóa purin, gây viêm khớp",
+                            IsDeleted = false,
                             Name = "Bệnh gút",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
@@ -1404,6 +1580,11 @@ namespace DataAccessObjects.Migrations
 
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
@@ -1437,6 +1618,7 @@ namespace DataAccessObjects.Migrations
                             Email = "admin@gmail.com",
                             Fullname = "Admin User",
                             Gender = "Male",
+                            IsDeleted = false,
                             Password = "admin123",
                             PhoneNumber = "0987654321",
                             Role = "Admin",
