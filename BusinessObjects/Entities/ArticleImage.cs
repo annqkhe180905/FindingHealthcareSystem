@@ -10,5 +10,10 @@ namespace BusinessObjects.Entities
     public class ArticleImage : BaseEntity
     {
         public string ImgUrl { get; set; }
+
+        //Relationship 
+        public int? ArticleID { get; set; }
+        public virtual Article? Article { get; set; }
+
     }
 }

@@ -16,17 +16,17 @@ namespace Services
     {
         private readonly FindingHealthcareSystemContext _context;
         private readonly Dictionary<Type, object> _repositories;
-        private readonly Dictionary<Type, object> _daos;
-        private IArticleRepository _articleRepository;
 
-
-
-        public UnitOfWork(FindingHealthcareSystemContext context)
+        private readonly IArticleRepository ArticleRepository;
+        private readonly IArticleImageRepository ArticleImageRepository;
+        public UnitOfWork(FindingHealthcareSystemContext context,IArticleRepository articleRepository,IArticleImageRepository articleImageRepository)
         {
             _context = context;
             _repositories = new Dictionary<Type, object>();
-            _daos = new Dictionary<Type, object>();
+            ArticleRepository = articleRepository; 
+            ArticleImageRepository = articleImageRepository;
         }
+
 
         public IGenericRepository<T> GetRepository<T>() where T : class
         {
@@ -40,18 +40,11 @@ namespace Services
             return (IGenericRepository<T>)_repositories[typeof(T)];
         }
 
-        // ✅ Tạo Generic DAO
-        public IGenericDAO<T> GetDAO<T>() where T : class
-        {
-            if (!_daos.ContainsKey(typeof(T)))
-            {
-                var dao = new GenericDAO<T>(_context);
-                _daos[typeof(T)] = dao;
-            }
-            return (IGenericDAO<T>)_daos[typeof(T)];
-        }
 
-        public IArticleRepository ArticleRepository =>_articleRepository ??= new ArticleRepository(GetDAO<Article>());
+        public IArticleRepository _articleRepository => ArticleRepository;
+
+        public IArticleImageRepository _articleImageRepository => ArticleImageRepository;
+
         public async Task<int> SaveChangesAsync()
         {
             return await _context.SaveChangesAsync();

@@ -20,11 +20,15 @@ namespace Services.Mappers
         public MappingProfile()
         {
             CreateMap<User, GeneralUserDto>().ReverseMap();
-
-            CreateMap<Article, NewsArticleDTO>().ReverseMap();
             CreateMap<Category,CategoryDTO>().ReverseMap();
             CreateMap<Department, DepartmentDto>().ReverseMap();
             CreateMap<FacilityType, FacilityTypeDto>().ReverseMap();
+
+            //Article 
+            CreateMap<Article, ArticleCreateDTO>().ReverseMap();
+            CreateMap<Article, ArticleUpdateDTO>().ReverseMap();
+            CreateMap<Article, ArticleReadDTO>().ReverseMap();  
+
         }
     }
 }

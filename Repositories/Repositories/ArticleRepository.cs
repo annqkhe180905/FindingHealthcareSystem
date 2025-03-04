@@ -12,9 +12,9 @@ namespace Repositories.Repositories
     public class ArticleRepository : GenericRepository<Article>, IArticleRepository
     {
         private readonly IGenericDAO<Article> _articleDAO;
-        public ArticleRepository(IGenericDAO<Article> dao) : base(articleDAO)
+        public ArticleRepository(IGenericDAO<Article> dao) : base(dao)
         {
-            _articleDAO = _articleDAO;
+            _articleDAO = dao;
         }
 
         public Task<Article> GetAllArticle(int id)

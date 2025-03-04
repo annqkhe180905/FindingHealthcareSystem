@@ -9,10 +9,10 @@ namespace Services.Interfaces
 {
     public interface IArticleService
     {
-        Task<IEnumerable<NewsArticleDTO>> GetAllNewsArticles();
-        Task<NewsArticleDTO> GetNewsArticleByID(int id);
-        Task<NewsArticleDTO> CreateNewsArtiles(NewsArticleDTO newsArticleDTO);
-        Task<NewsArticleDTO> UpdateNewsArticleByID(NewsArticleDTO newsArticleDTO);
+        Task<IEnumerable<ArticleReadDTO>> GetAllNewsArticles();
+        Task<ArticleReadDTO> GetNewsArticleByID(int id);
+        Task<ArticleCreateDTO> CreateNewsArtiles(ArticleCreateDTO newsArticleDTO);
+        Task<ArticleUpdateDTO> UpdateNewsArticleByID(ArticleUpdateDTO newsArticleDTO,int id);
         Task<bool> DeleteNewsArticles(int id);
     }
 }

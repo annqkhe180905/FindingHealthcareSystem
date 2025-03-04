@@ -6,13 +6,13 @@ namespace BusinessObjects.Entities;
 
 public partial class Article : BaseEntity
 {
-    public int? CategoryId { get; set; }
+    public int? CategoryId { get; set; } 
 
     public string? Title { get; set; }
 
-    public DateTime? CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; } 
 
-    public int? CreatedById { get; set; }
+    public int? CreatedById { get; set; } 
 
     public string? Content { get; set; }
 
