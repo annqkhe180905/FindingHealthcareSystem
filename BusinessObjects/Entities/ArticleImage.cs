@@ -11,9 +11,8 @@ namespace BusinessObjects.Entities
     {
         public string ImgUrl { get; set; }
 
-        //Relationship 
-        public int? ArticleID { get; set; }
-        public virtual Article? Article { get; set; }
+        public int ArticleId { get; set; }
+        public virtual Article Article { get; set; }
 
     }
 }

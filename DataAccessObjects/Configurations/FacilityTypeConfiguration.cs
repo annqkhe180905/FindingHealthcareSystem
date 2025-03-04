@@ -16,6 +16,11 @@ namespace DataAccessObjects.Configurations
         {
             builder.HasKey(e => e.Id);
 
+            builder.HasMany(ft => ft.Facilities)
+            .WithOne(f => f.Type) 
+            .HasForeignKey(f => f.TypeId)  
+            .OnDelete(DeleteBehavior.SetNull);
+
             builder.HasData(
                 new FacilityType { Id = 1, Name = "Bệnh viện", Description = "Cơ sở y tế chuyên điều trị các bệnh lý đa dạng." },
                 new FacilityType { Id = 2, Name = "Phòng khám", Description = "Cơ sở y tế nhỏ, chủ yếu khám chữa bệnh ngoại trú." },

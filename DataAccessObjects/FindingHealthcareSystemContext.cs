@@ -87,6 +87,10 @@ public partial class FindingHealthcareSystemContext : DbContext
                 modelBuilder.Entity(entityType.ClrType)
                     .Property(nameof(BaseEntity.UpdatedAt))
                     .HasDefaultValueSql("GETUTCDATE()");
+
+                modelBuilder.Entity(entityType.ClrType)
+                   .Property(nameof(BaseEntity.IsDeleted))
+                   .HasDefaultValue(false);
             }
         }
 
@@ -177,11 +181,28 @@ public partial class FindingHealthcareSystemContext : DbContext
             .HasConstraintName("FK_Review_Facility")
             .OnDelete(DeleteBehavior.Restrict);
 
-        modelBuilder.ApplyConfiguration(new UserConfiguration());
-        modelBuilder.ApplyConfiguration(new DepartmentConfiguration());
-        modelBuilder.ApplyConfiguration(new FacilityTypeConfiguration());
-        modelBuilder.ApplyConfiguration(new ArticleImageConfiguration());
+        modelBuilder.ApplyConfiguration(new AppointmentConfiguration());
         modelBuilder.ApplyConfiguration(new ArticleConfiguration());
+        modelBuilder.ApplyConfiguration(new ArticleImageConfiguration());
+        modelBuilder.ApplyConfiguration(new AttachmentsConfiguration());
+        modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+        modelBuilder.ApplyConfiguration(new DepartmentConfiguration());
+        modelBuilder.ApplyConfiguration(new ExpertiseConfiguration());
+        modelBuilder.ApplyConfiguration(new FacilityConfiguration());
+        modelBuilder.ApplyConfiguration(new FacilityDepConfiguration());
+        modelBuilder.ApplyConfiguration(new FacilityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new MedicalRecordConfiguration());
+        modelBuilder.ApplyConfiguration(new PatientConfiguration());
+        modelBuilder.ApplyConfiguration(new PatientUnderlyingDiseaseConfiguration());
+        modelBuilder.ApplyConfiguration(new PaymentConfiguration());
+        modelBuilder.ApplyConfiguration(new PrivateServiceConfiguration());
+        modelBuilder.ApplyConfiguration(new ProfessionalConfiguration());
+        modelBuilder.ApplyConfiguration(new ProfessionalSpecialtyConfiguration());
+        modelBuilder.ApplyConfiguration(new PublicServiceConfiguration());
+        modelBuilder.ApplyConfiguration(new ReviewConfiguration());
+        modelBuilder.ApplyConfiguration(new SpecialtyConfiguration());
+        modelBuilder.ApplyConfiguration(new UnderlyingDiseaseConfiguration());
+        modelBuilder.ApplyConfiguration(new UserConfiguration());
 
         OnModelCreatingPartial(modelBuilder);
 
@@ -195,6 +216,8 @@ public partial class FindingHealthcareSystemContext : DbContext
             {
                 entry.Entity.CreatedAt = DateTime.UtcNow;
                 entry.Entity.UpdatedAt = DateTime.UtcNow;
+                entry.Entity.IsDeleted = false;
+
             }
 
             if (entry.State == EntityState.Modified)
@@ -214,6 +237,8 @@ public partial class FindingHealthcareSystemContext : DbContext
             {
                 entry.Entity.CreatedAt = DateTime.UtcNow;
                 entry.Entity.UpdatedAt = DateTime.UtcNow;
+                entry.Entity.IsDeleted = false;
+
             }
 
             if (entry.State == EntityState.Modified)
