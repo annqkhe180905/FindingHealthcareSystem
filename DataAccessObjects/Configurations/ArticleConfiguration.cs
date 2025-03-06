@@ -13,22 +13,20 @@ namespace DataAccessObjects.Configurations
     {
         public void Configure(EntityTypeBuilder<Article> builder)
         {
-            builder.HasKey(e => e.Id);
-
             builder.HasOne(a => a.CreatedBy)
-              .WithMany()
-              .HasForeignKey(a => a.CreatedById)
-              .OnDelete(DeleteBehavior.SetNull);
+                .WithMany(u => u.Articles)
+                .HasForeignKey(a => a.CreatedById)
+                .OnDelete(DeleteBehavior.SetNull);
 
             builder.HasOne(a => a.Category)
-              .WithMany()
-              .HasForeignKey(a => a.CategoryId)
-              .OnDelete(DeleteBehavior.SetNull);
+                .WithMany(c => c.Articles) 
+                .HasForeignKey(a => a.CategoryId)
+                .OnDelete(DeleteBehavior.SetNull);
 
             builder.HasMany(a => a.ArticleImages)
-                   .WithOne()
-                   .HasForeignKey(ai => ai.Id)
-                   .OnDelete(DeleteBehavior.Cascade);
+                .WithOne() 
+                .HasForeignKey(ai => ai.ArticleId)  
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

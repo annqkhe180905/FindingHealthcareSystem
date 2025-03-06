@@ -25,7 +25,7 @@ public partial class User : BaseEntity
 
     public virtual ICollection<Article> Articles { get; set; } = new List<Article>();
 
-    public virtual ICollection<Patient> Patients { get; set; } = new List<Patient>();
+    public virtual Patient? Patient { get; set; }
 
     public virtual Professional? Professional { get; set; }
 }
