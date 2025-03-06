@@ -41,8 +41,6 @@ public partial class FindingHealthcareSystemContext : DbContext
 
     public virtual DbSet<Patient> Patients { get; set; }
 
-    public virtual DbSet<PatientUnderlyingDisease> PatientUnderlyingDiseases { get; set; }
-
     public virtual DbSet<Payment> Payments { get; set; }
 
     public virtual DbSet<PrivateService> PrivateServices { get; set; }
@@ -56,8 +54,6 @@ public partial class FindingHealthcareSystemContext : DbContext
     public virtual DbSet<Review> Reviews { get; set; }
 
     public virtual DbSet<Specialty> Specialties { get; set; }
-
-    public virtual DbSet<UnderlyingDisease> UnderlyingDiseases { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
 
@@ -193,7 +189,6 @@ public partial class FindingHealthcareSystemContext : DbContext
         modelBuilder.ApplyConfiguration(new FacilityTypeConfiguration());
         modelBuilder.ApplyConfiguration(new MedicalRecordConfiguration());
         modelBuilder.ApplyConfiguration(new PatientConfiguration());
-        modelBuilder.ApplyConfiguration(new PatientUnderlyingDiseaseConfiguration());
         modelBuilder.ApplyConfiguration(new PaymentConfiguration());
         modelBuilder.ApplyConfiguration(new PrivateServiceConfiguration());
         modelBuilder.ApplyConfiguration(new ProfessionalConfiguration());
@@ -201,7 +196,6 @@ public partial class FindingHealthcareSystemContext : DbContext
         modelBuilder.ApplyConfiguration(new PublicServiceConfiguration());
         modelBuilder.ApplyConfiguration(new ReviewConfiguration());
         modelBuilder.ApplyConfiguration(new SpecialtyConfiguration());
-        modelBuilder.ApplyConfiguration(new UnderlyingDiseaseConfiguration());
         modelBuilder.ApplyConfiguration(new UserConfiguration());
 
         OnModelCreatingPartial(modelBuilder);

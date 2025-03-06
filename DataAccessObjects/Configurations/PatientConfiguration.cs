@@ -30,12 +30,6 @@ namespace DataAccessObjects.Configurations
                 .WithOne(r => r.Patient)
                 .HasForeignKey(r => r.PatientId)
                 .OnDelete(DeleteBehavior.Cascade);
-
-            builder.HasMany(p => p.PatientUnderlyingDiseases)
-            .WithOne(pud => pud.Patient)  
-            .HasForeignKey(pud => pud.PatientId)
-            .OnDelete(DeleteBehavior.Cascade);
-
         }
     }
 }
