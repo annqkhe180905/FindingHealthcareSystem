@@ -21,6 +21,8 @@ namespace Services.Interfaces
         int pageSize);
 
         Task<GeneralUserDto?> GetUserByIdAsync(int userId);
-
+        Task AddUserAsync(GeneralUserDto userDto);
+        Task UpdateUserAsync(GeneralUserDto userDto);
+        Task DeleteUserAsync(int id);
     }
 }

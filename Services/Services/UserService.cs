@@ -4,12 +4,7 @@ using BusinessObjects.Dtos.User;
 using BusinessObjects.Entities;
 using Repositories.Interfaces;
 using Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Services.Services
 {
@@ -77,6 +72,35 @@ namespace Services.Services
                 "status" => u => u.Status,
                 _ => u => u.Id
             };
+        }
+
+        public async Task AddUserAsync(GeneralUserDto userDto)
+        {
+            var user = _mapper.Map<User>(userDto);
+            await _unitOfWork.GetRepository<User>().AddAsync(user);
+        }
+
+        public async Task UpdateUserAsync(GeneralUserDto userDto)
+        {
+            var userRepo = _unitOfWork.GetRepository<User>();
+            var user = await userRepo.GetByIdAsync(userDto.Id);
+            if (user == null)
+            {
+                throw new KeyNotFoundException("User not found.");
+            }
+            _mapper.Map(userDto, user); // Update properties from DTO
+
+            userRepo.Update(user); // No need to await since it's void
+            await _unitOfWork.SaveChangesAsync(); // Ensure changes are persisted
+        }
+
+        public async Task DeleteUserAsync(int id)
+        {
+            var userRepo = _unitOfWork.GetRepository<User>();
+            var user = await userRepo.GetByIdAsync(id);
+            userRepo.Remove(user);
+            await _unitOfWork.SaveChangesAsync(); // Ensure changes are persisted
+
         }
     }
 }
