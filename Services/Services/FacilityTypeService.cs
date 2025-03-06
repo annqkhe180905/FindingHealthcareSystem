@@ -31,5 +31,40 @@ namespace Services.Services
             }
             return _mapper.Map<List<FacilityTypeDto>>(facilities);
         }
+
+        public async Task<FacilityTypeDto> Create (FacilityTypeDto facilityTypeDto)
+        {
+            var facRepo = _unitOfWork.GetRepository<FacilityType>();
+            var facility = _mapper.Map<FacilityType>(facilityTypeDto);
+            await facRepo.AddAsync(facility);
+            await _unitOfWork.SaveChangesAsync();
+            return _mapper.Map<FacilityTypeDto>(facility);
+        }
+
+        public async Task<FacilityTypeDto> Update(int id, FacilityTypeDto facilityTypeDto)
+        {
+            var facRepo = _unitOfWork.GetRepository<FacilityType>();
+            var facility = await facRepo.GetByIdAsync(id);
+            if (facility == null)
+            {
+                throw new Exception("Facility Type not found");
+            }
+            facility.Name = facilityTypeDto.Name;
+            facility.Description = facilityTypeDto.Description;
+            facRepo.Update(facility);
+            await _unitOfWork.SaveChangesAsync();
+            return _mapper.Map<FacilityTypeDto>(facility);
+        }
+
+        public async Task<FacilityTypeDto> GetById(int id)
+        {
+            var facRepo = _unitOfWork.GetRepository<FacilityType>();
+            var facility = await facRepo.GetByIdAsync(id);
+            if (facility == null)
+            {
+                throw new Exception("Facility Type not found");
+            }
+            return _mapper.Map<FacilityTypeDto>(facility);
+        }
     }
 }

@@ -30,5 +30,40 @@ namespace Services.Services
             }
             return _mapper.Map<List<DepartmentDto>>(departments);
         }
+
+        public async Task<DepartmentDto> Create(DepartmentDto departmentDto)
+        {
+            var departmentRepo = _unitOfWork.GetRepository<Department>();
+            var department = _mapper.Map<Department>(departmentDto);
+            await departmentRepo.AddAsync(department);
+            await _unitOfWork.SaveChangesAsync();
+            return _mapper.Map<DepartmentDto>(department);
+        }
+
+        public async Task<DepartmentDto> Update(int id, DepartmentDto departmentDto)
+        {
+            var departmentRepo = _unitOfWork.GetRepository<Department>();
+            var department = await departmentRepo.GetByIdAsync(id);
+            if (department == null)
+            {
+                throw new Exception("Department not found");
+            }
+            department.Name = departmentDto.Name;
+            department.Description = departmentDto.Description;
+            departmentRepo.Update(department);
+            await _unitOfWork.SaveChangesAsync();
+            return _mapper.Map<DepartmentDto>(department);
+        }
+
+        public async Task<DepartmentDto> GetById(int id)
+        {
+            var departmentRepo = _unitOfWork.GetRepository<Department>();
+            var department = await departmentRepo.GetByIdAsync(id);
+            if (department == null)
+            {
+                throw new Exception("Department not found");
+            }
+            return _mapper.Map<DepartmentDto>(department);
+        }
     }
 }
