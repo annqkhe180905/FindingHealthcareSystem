@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccessObjects.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class Intial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -457,6 +457,8 @@ namespace DataAccessObjects.Migrations
                     Rating = table.Column<int>(type: "int", nullable: true),
                     Comment = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ProfessionalId = table.Column<int>(type: "int", nullable: true),
+                    FacilityId = table.Column<int>(type: "int", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()"),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()")
@@ -477,11 +479,21 @@ namespace DataAccessObjects.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
+                        name: "FK_Reviews_Facilities_FacilityId",
+                        column: x => x.FacilityId,
+                        principalTable: "Facilities",
+                        principalColumn: "Id");
+                    table.ForeignKey(
                         name: "FK_Reviews_Patients_PatientId",
                         column: x => x.PatientId,
                         principalTable: "Patients",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Reviews_Professionals_ProfessionalId",
+                        column: x => x.ProfessionalId,
+                        principalTable: "Professionals",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -817,9 +829,19 @@ namespace DataAccessObjects.Migrations
                 column: "FacilityId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Reviews_FacilityId",
+                table: "Reviews",
+                column: "FacilityId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Reviews_PatientId",
                 table: "Reviews",
                 column: "PatientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reviews_ProfessionalId",
+                table: "Reviews",
+                column: "ProfessionalId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reviews_ProviderId",

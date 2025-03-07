@@ -1137,12 +1137,18 @@ namespace DataAccessObjects.Migrations
                     b.Property<DateTime?>("Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("FacilityId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
                     b.Property<int?>("PatientId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProfessionalId")
                         .HasColumnType("int");
 
                     b.Property<int?>("ProviderId")
@@ -1162,7 +1168,11 @@ namespace DataAccessObjects.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("FacilityId");
+
                     b.HasIndex("PatientId");
+
+                    b.HasIndex("ProfessionalId");
 
                     b.HasIndex("ProviderId");
 
@@ -1830,10 +1840,18 @@ namespace DataAccessObjects.Migrations
 
             modelBuilder.Entity("BusinessObjects.Entities.Review", b =>
                 {
+                    b.HasOne("BusinessObjects.Entities.Facility", "Facility")
+                        .WithMany()
+                        .HasForeignKey("FacilityId");
+
                     b.HasOne("BusinessObjects.Entities.Patient", "Patient")
                         .WithMany("Reviews")
                         .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("BusinessObjects.Entities.Professional", "Professional")
+                        .WithMany()
+                        .HasForeignKey("ProfessionalId");
 
                     b.HasOne("BusinessObjects.Entities.Facility", null)
                         .WithMany()
@@ -1847,7 +1865,11 @@ namespace DataAccessObjects.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .HasConstraintName("FK_Review_Professional");
 
+                    b.Navigation("Facility");
+
                     b.Navigation("Patient");
+
+                    b.Navigation("Professional");
                 });
 
             modelBuilder.Entity("BusinessObjects.Entities.Appointment", b =>

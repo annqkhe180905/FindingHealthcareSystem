@@ -56,13 +56,13 @@ namespace Services.Services
                 var getArticleID = await _unitOfWork._articleRepository.GetByIdAsync(id);
                 if (getArticleID != null)
                 {
-                    if (getArticleID.Status == 1)
+                    if (getArticleID.IsDeleted = true )
                     {
-                        getArticleID.Status = 0;
+                        getArticleID.IsDeleted = false;
                     }
                     else
                     {
-                        getArticleID.Status = 1;
+                        getArticleID.IsDeleted = true;
                     }
                     _unitOfWork._articleRepository.Update(getArticleID);
                     var IsSuccess = await _unitOfWork.SaveChangesAsync()>0;
