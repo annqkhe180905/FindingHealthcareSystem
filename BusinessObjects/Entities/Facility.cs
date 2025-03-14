@@ -25,6 +25,8 @@ public partial class Facility : BaseEntity
 
     public FacilityStatus Status { get; set; }
 
+    public bool IsDeleted { get; set; }
+
     public virtual ICollection<FacilityDepartment> FacilityDepartments { get; set; } = new List<FacilityDepartment>();
 
     public virtual ICollection<PublicService> PublicServices { get; set; } = new List<PublicService>();

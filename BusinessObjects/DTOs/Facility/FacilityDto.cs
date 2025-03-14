@@ -10,6 +10,7 @@ namespace BusinessObjects.DTOs.Facility
     public class FacilityDto
     {
         public int? Id { get; set; }
+
         public int? TypeId { get; set; }
 
         public string? Name { get; set; }

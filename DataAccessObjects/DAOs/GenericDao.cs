@@ -68,6 +68,35 @@ namespace DataAccessObjects.DAOs
             return await PaginatedList<T>.CreateAsync(query, pageIndex, pageSize);
         }
 
+        public IQueryable<T> GetFilteredQuery(Dictionary<string, object?> filters, List<string>? includes = null)
+        {
+            IQueryable<T> query = _dbSet;
+
+            // Apply Includes (Joins) for multiple tables
+            if (includes != null)
+            {
+                foreach (var include in includes)
+                {
+                    query = query.Include(include);
+                }
+            }
+
+            // Apply Filters for Facility and related entities
+            foreach (var filter in filters)
+            {
+                var property = typeof(T).GetProperty(filter.Key);
+                if (property != null && filter.Value != null)
+                {
+                    query = query.Where(entity =>
+                        property.GetValue(entity) != null &&
+                        property.GetValue(entity)!.ToString()!.Contains(filter.Value!.ToString()!)
+                    );
+                }
+            }
+
+            return query;
+        }
+
         public async Task AddAsync(T entity)
         {
             await _dbSet.AddAsync(entity);
