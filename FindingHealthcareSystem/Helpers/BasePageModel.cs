@@ -8,7 +8,7 @@ namespace FindingHealthcareSystem.Helpers
         public IActionResult OnPostLogout()
         {
             HttpContext.Session.Clear();
-            return RedirectToPage("/");
+            return Redirect("/");
         }
 
     }
