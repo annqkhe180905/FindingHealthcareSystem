@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessObjects.DTOs.Department;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +12,7 @@ namespace BusinessObjects.DTOs.Facility
         public int? Id { get; set; }
         public int? FacilityId { get; set; }
         public int? DepartmentId { get; set; }
+
+        public DepartmentDto? Department { get; set; }
     }
 }

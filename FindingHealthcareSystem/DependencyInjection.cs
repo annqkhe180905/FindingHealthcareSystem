@@ -24,6 +24,8 @@ namespace FindingHealthcareSystem
             services.AddScoped<IFacilityTypeService, FacilityTypeService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<ILocationService, LocationService>(); 
+            services.AddScoped<IFacilityDao, FacilityDao>();
+            services.AddScoped<IFacilityRepository, FacilityRepository>();
 
 
             return services;

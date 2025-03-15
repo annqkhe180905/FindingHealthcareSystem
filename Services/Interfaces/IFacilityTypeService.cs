@@ -11,10 +11,9 @@ namespace Services.Interfaces
     public interface IFacilityTypeService
     {
         Task<List<FacilityTypeDto>> GetAllFacilityTypes();
-        Task<IEnumerable<FacilityDto>> SearchFacilities(string? name, string? province, string? operationDay, string? district, string? city);
-        Task<FacilityDto> Create(FacilityDto facilityDto);
-        Task<FacilityDto> Update(int id, FacilityDto facilityDto);
-        Task<FacilityDto> GetById(int id);
-        Task<FacilityDto> DeleteAsync(int id);
+        Task<FacilityTypeDto> Create(FacilityTypeDto facilityDto);
+        Task<FacilityTypeDto> Update(int id, FacilityTypeDto facilityDto);
+        Task<FacilityTypeDto> GetById(int id);
+        Task<FacilityTypeDto> DeleteAsync(int id);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BusinessObjects.Dtos.User;
 using BusinessObjects.DTOs.Department;
+using BusinessObjects.DTOs.Facility;
 using BusinessObjects.Entities;
 using Services.Interfaces;
 using System;
@@ -33,6 +34,14 @@ namespace Services.Services
 
         public async Task<DepartmentDto> Create(DepartmentDto departmentDto)
         {
+            if (string.IsNullOrEmpty(departmentDto.Name))
+            {
+                throw new Exception("Department name is required");
+            }
+            if (string.IsNullOrEmpty(departmentDto.Description))
+            {
+                throw new Exception("Department description is required");
+            }
             var departmentRepo = _unitOfWork.GetRepository<Department>();
             var department = _mapper.Map<Department>(departmentDto);
             await departmentRepo.AddAsync(department);
@@ -42,6 +51,14 @@ namespace Services.Services
 
         public async Task<DepartmentDto> Update(int id, DepartmentDto departmentDto)
         {
+            if (string.IsNullOrEmpty(departmentDto.Name))
+            {
+                throw new Exception("Department name is required");
+            }
+            if (string.IsNullOrEmpty(departmentDto.Description))
+            {
+                throw new Exception("Department description is required");
+            }
             var departmentRepo = _unitOfWork.GetRepository<Department>();
             var department = await departmentRepo.GetByIdAsync(id);
             if (department == null)

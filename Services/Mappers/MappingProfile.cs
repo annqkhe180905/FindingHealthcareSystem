@@ -18,6 +18,8 @@ namespace Services.Mappers
             CreateMap<User, GeneralUserDto>().ReverseMap();
             CreateMap<Department, DepartmentDto>().ReverseMap();
             CreateMap<FacilityType, FacilityTypeDto>().ReverseMap();
+            CreateMap<FacilityDepartment, FacilityDepartmentDto>().ReverseMap();
+            CreateMap<Facility, FacilityDto>().ReverseMap();
         }
     }
 }
