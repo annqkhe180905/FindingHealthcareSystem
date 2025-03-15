@@ -24,6 +24,12 @@ namespace DataAccessObjects.Configurations
                 .WithMany(s => s.ProfessionalSpecialties)  
                 .HasForeignKey(ps => ps.SpecialtyId)  
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasData(
+            new ProfessionalSpecialty { Id = 1, ProfessionalId = 1, SpecialtyId = 1 },
+            new ProfessionalSpecialty { Id = 2, ProfessionalId = 1, SpecialtyId = 2 },
+            new ProfessionalSpecialty { Id = 3, ProfessionalId = 2, SpecialtyId = 12 }
+            );
         }
     }
 }

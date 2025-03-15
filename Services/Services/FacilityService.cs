@@ -11,10 +11,11 @@ using BusinessObjects.Enums;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects.DTOs.Department;
+using Services.Interfaces;
 
 namespace Services.Services
 {
-    public class FacilityService
+    public class FacilityService : IFacilityService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DataAccessObjects.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class SeedUser : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -119,23 +119,6 @@ namespace DataAccessObjects.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UnderlyingDiseases",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()"),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UnderlyingDiseases", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
@@ -149,6 +132,7 @@ namespace DataAccessObjects.Migrations
                     Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Birthday = table.Column<DateOnly>(type: "date", nullable: true),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImgUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()"),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()")
@@ -358,35 +342,6 @@ namespace DataAccessObjects.Migrations
                         name: "FK_ArticleImage_Articles_ArticleId",
                         column: x => x.ArticleId,
                         principalTable: "Articles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PatientUnderlyingDiseases",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UnderlyingDiseaseId = table.Column<int>(type: "int", nullable: true),
-                    PatientId = table.Column<int>(type: "int", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()"),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GETUTCDATE()")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PatientUnderlyingDiseases", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_PatientUnderlyingDiseases_Patients_PatientId",
-                        column: x => x.PatientId,
-                        principalTable: "Patients",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_PatientUnderlyingDiseases_UnderlyingDiseases_UnderlyingDiseaseId",
-                        column: x => x.UnderlyingDiseaseId,
-                        principalTable: "UnderlyingDiseases",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -671,36 +626,44 @@ namespace DataAccessObjects.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "UnderlyingDiseases",
-                columns: new[] { "Id", "Description", "Name" },
+                table: "Users",
+                columns: new[] { "Id", "Birthday", "Email", "Fullname", "Gender", "ImgUrl", "Password", "PhoneNumber", "Role", "Status" },
                 values: new object[,]
                 {
-                    { 1, "Bệnh lý do rối loạn chuyển hóa đường trong máu", "Tiểu đường" },
-                    { 2, "Tăng huyết áp có thể gây nguy cơ bệnh tim mạch", "Huyết áp cao" },
-                    { 3, "Bệnh đường hô hấp mãn tính gây khó thở", "Hen suyễn" },
-                    { 4, "Tình trạng mỡ thừa tích tụ quá mức gây ảnh hưởng sức khỏe", "Béo phì" },
-                    { 5, "Tình trạng tim không bơm đủ máu đến cơ thể", "Suy tim" },
-                    { 6, "Suy giảm chức năng thận ảnh hưởng đến bài tiết và lọc độc tố", "Suy thận" },
-                    { 7, "Bệnh mãn tính gây khó thở, thường gặp ở người hút thuốc lá", "Bệnh phổi tắc nghẽn mãn tính (COPD)" },
-                    { 8, "Suy giảm mật độ xương làm tăng nguy cơ gãy xương", "Loãng xương" },
-                    { 9, "Rối loạn thần kinh ảnh hưởng đến vận động", "Bệnh Parkinson" },
-                    { 10, "Bệnh thoái hóa thần kinh ảnh hưởng đến trí nhớ và nhận thức", "Bệnh Alzheimer" },
-                    { 11, "Bệnh nhiễm virus viêm gan B gây tổn thương gan", "Viêm gan B" },
-                    { 12, "Bệnh nhiễm virus viêm gan C có thể gây xơ gan", "Viêm gan C" },
-                    { 13, "Mỡ máu cao có thể dẫn đến xơ vữa động mạch", "Rối loạn lipid máu" },
-                    { 14, "Tắc nghẽn hoặc vỡ mạch máu não gây tổn thương não", "Đột quỵ" },
-                    { 15, "Viêm loét dạ dày hoặc trào ngược dạ dày thực quản", "Bệnh dạ dày - tá tràng" },
-                    { 16, "Giảm khả năng đề kháng với bệnh tật", "Suy giảm miễn dịch" },
-                    { 17, "Bệnh tự miễn ảnh hưởng nhiều cơ quan trong cơ thể", "Bệnh Lupus ban đỏ hệ thống" },
-                    { 18, "Bệnh không dung nạp gluten gây tổn thương ruột non", "Bệnh Celiac" },
-                    { 19, "Suy giảm miễn dịch gây nguy cơ nhiễm trùng cao", "HIV/AIDS" },
-                    { 20, "Bệnh do rối loạn chuyển hóa purin, gây viêm khớp", "Bệnh gút" }
+                    { 1, new DateOnly(1990, 1, 1), "admin@example.com", "Admin", "Nam", null, "ad123456", "0901234567", "Admin", "Active" },
+                    { 2, new DateOnly(1995, 5, 20), "patient1@example.com", "Trần Thị B", "Nữ", null, "pa123456", "0902345678", "Patient", "Active" },
+                    { 3, new DateOnly(1996, 10, 12), "patient2@example.com", "Nguyễn Thị C", "Nữ", null, "pa123456", "0903456789", "Patient", "Active" },
+                    { 4, new DateOnly(1985, 3, 15), "professional1@example.com", "Lê Minh D", "Nam", null, "pro123456", "0904567890", "Professional", "Active" },
+                    { 5, new DateOnly(1987, 7, 30), "professional2@example.com", "Phan Minh E", "Nam", null, "pro123456", "0905678901", "Professional", "Inactive" }
                 });
 
             migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "Birthday", "Email", "Fullname", "Gender", "Password", "PhoneNumber", "Role", "Status" },
-                values: new object[] { 1, new DateOnly(1985, 2, 20), "admin@gmail.com", "Admin User", "Male", "admin123", "0987654321", "Admin", "Active" });
+                table: "Patients",
+                columns: new[] { "Id", "Note", "UserId" },
+                values: new object[,]
+                {
+                    { 1, "Bệnh nhân có tiền sử bệnh tim mạch", 2 },
+                    { 2, "Bệnh nhân bị tiểu đường type 2 và huyết áp cao", 3 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Professionals",
+                columns: new[] { "Id", "Address", "City", "Degree", "District", "Experience", "ExpertiseId", "ExpertiseId1", "Province", "RequestStatus", "UserId", "WorkingHours" },
+                values: new object[,]
+                {
+                    { 1, "Số 10, Đường X, Hà Nội", "Hà Nội", "Bác sĩ đa khoa", "Ba Đình", "Có 10 năm kinh nghiệm trong lĩnh vực khám chữa bệnh", 1, null, "Hà Nội", "Approved", 4, "Thứ 2 - Thứ 6, 8:00 - 17:00" },
+                    { 2, "Số 15, Đường Y, Hồ Chí Minh", "Hồ Chí Minh", "Bác sĩ y học cổ truyền", "Quận 1", "Có 5 năm kinh nghiệm trong điều trị các bệnh lý bằng y học cổ truyền", 2, null, "Hồ Chí Minh", "Pending", 5, "Thứ 2 - Thứ 7, 9:00 - 18:00" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ProfessionalSpecialties",
+                columns: new[] { "Id", "ProfessionalId", "SpecialtyId" },
+                values: new object[,]
+                {
+                    { 1, 1, 1 },
+                    { 2, 1, 2 },
+                    { 3, 2, 12 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Appointments_PatientId",
@@ -770,16 +733,6 @@ namespace DataAccessObjects.Migrations
                 filter: "[UserId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PatientUnderlyingDiseases_PatientId",
-                table: "PatientUnderlyingDiseases",
-                column: "PatientId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PatientUnderlyingDiseases_UnderlyingDiseaseId",
-                table: "PatientUnderlyingDiseases",
-                column: "UnderlyingDiseaseId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_PrivateServices_ProfessionalId",
                 table: "PrivateServices",
                 column: "ProfessionalId");
@@ -840,9 +793,6 @@ namespace DataAccessObjects.Migrations
                 name: "FacilityDepartments");
 
             migrationBuilder.DropTable(
-                name: "PatientUnderlyingDiseases");
-
-            migrationBuilder.DropTable(
                 name: "ProfessionalSpecialties");
 
             migrationBuilder.DropTable(
@@ -856,9 +806,6 @@ namespace DataAccessObjects.Migrations
 
             migrationBuilder.DropTable(
                 name: "Departments");
-
-            migrationBuilder.DropTable(
-                name: "UnderlyingDiseases");
 
             migrationBuilder.DropTable(
                 name: "Specialties");

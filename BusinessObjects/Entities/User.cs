@@ -23,6 +23,8 @@ public partial class User : BaseEntity
 
     public UserStatus Status { get; set; }
 
+    public string? ImgUrl { get; set; }
+
     public virtual ICollection<Article> Articles { get; set; } = new List<Article>();
 
     public virtual Patient? Patient { get; set; }
