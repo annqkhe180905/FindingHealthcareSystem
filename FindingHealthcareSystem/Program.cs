@@ -24,6 +24,11 @@ namespace FindingHealthcareSystem
             o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
             builder.Services.AddApplicationService();
             builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("Cloudinary"));
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30); 
+                options.Cookie.HttpOnly = true;
+            });
 
             var app = builder.Build();
 
@@ -40,6 +45,7 @@ namespace FindingHealthcareSystem
 
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseAuthorization();
 
