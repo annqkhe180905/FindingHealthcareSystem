@@ -14,6 +14,5 @@ namespace BusinessObjects.Dtos.User
         public string PhoneNumber { get; set; }
         public string Role { get; set; }
         public string Status { get; set; }
-        public string ImgUrl { get; set; }
     }
 }

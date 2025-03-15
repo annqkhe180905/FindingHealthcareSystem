@@ -31,9 +31,6 @@ namespace FindingHealthcareSystem
             services.AddScoped<IArticleImageRepository, ArticleImageRepository>();
             services.AddScoped<IArticlesImagesServices,ArticleImageService>();
 
-            services.AddTransient<ILocationService, LocationService>();
-            services.AddScoped<IAuthService, AuthService>();
-            services.AddHttpContextAccessor();
 
             return services;
         }

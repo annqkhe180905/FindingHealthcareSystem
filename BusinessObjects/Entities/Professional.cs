@@ -35,4 +35,3 @@ public partial class Professional : BaseEntity
 
     public virtual User? User { get; set; }
 }
-

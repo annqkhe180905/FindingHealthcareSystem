@@ -3,8 +3,6 @@ using BusinessObjects.Dtos.User;
 using BusinessObjects.DTOs.Department;
 using BusinessObjects.DTOs.Facility;
 using BusinessObjects.LocationModels;
-using FindingHealthcareSystem.Helpers;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Services.Interfaces;
@@ -12,7 +10,7 @@ using Services.Services;
 
 namespace FindingHealthcareSystem.Pages
 {
-    public class IndexModel : BasePageModel
+    public class IndexModel : PageModel
     {
         private readonly ILocationService _locationService;
         private readonly IDepartmentService _departmentService;
@@ -26,14 +24,12 @@ namespace FindingHealthcareSystem.Pages
         [BindProperty(SupportsGet = true)]
         public string SelectedProvinceCode { get; set; }
 
-
-        public IndexModel(ILocationService locationService, IDepartmentService departmentService, IFacilityTypeService facilityTypeService, IHttpContextAccessor httpContextAccessor)
+        public IndexModel(ILocationService locationService, IDepartmentService departmentService, IFacilityTypeService facilityTypeService)
         {
             _locationService = locationService;
             _departmentService = departmentService;
             _facilityTypeService = facilityTypeService;
         }
-
 
         public async Task OnGetAsync()
         {

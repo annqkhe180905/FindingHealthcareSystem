@@ -1,13 +1,10 @@
 ﻿@page
 @model IndexModel
-@using BusinessObjects.DTOs.Department
 @{
-    var departmentsInChunks = (Model.Departments != null && Model.Departments.Any())
-        ? Model.Departments.Select((department, index) => new { department, index })
-                            .GroupBy(x => x.index / 5)
-                            .Select(group => group.Select(x => x.department).ToList())
-                            .ToList()
-        : new List<List<DepartmentDto>>();
+    var departmentsInChunks = Model.Departments.Select((department, index) => new { department, index })
+                                               .GroupBy(x => x.index / 5)
+                                               .Select(group => group.Select(x => x.department).ToList())
+                                               .ToList();
 }
 
 <!-- Intro -->

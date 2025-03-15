@@ -30,21 +30,6 @@ namespace DataAccessObjects.Configurations
                 .WithOne(r => r.Patient)
                 .HasForeignKey(r => r.PatientId)
                 .OnDelete(DeleteBehavior.Cascade);
-
-            builder.HasData(
-                new Patient
-                {
-                    Id = 1,
-                    UserId = 2,  
-                    Note = "Bệnh nhân có tiền sử bệnh tim mạch",
-                },
-            new Patient
-            {
-                Id = 2,
-                UserId = 3,
-                Note = "Bệnh nhân bị tiểu đường type 2 và huyết áp cao",
-            }
-                );
         }
     }
 }
