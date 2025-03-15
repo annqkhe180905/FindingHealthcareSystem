@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BusinessObjects.Dtos.User;
 using BusinessObjects.DTOs;
+using BusinessObjects.DTOs.Auth;
 using BusinessObjects.DTOs.Department;
 using BusinessObjects.DTOs.Facility;
 using BusinessObjects.Entities;
@@ -20,6 +21,7 @@ namespace Services.Mappers
             CreateMap<Department, DepartmentDto>().ReverseMap();
             CreateMap<FacilityType, FacilityTypeDto>().ReverseMap();
             CreateMap<Appointment, AppointmentDTO>().ReverseMap();
+            CreateMap<User, LoginDto>().ReverseMap();
         }
     }
 }
