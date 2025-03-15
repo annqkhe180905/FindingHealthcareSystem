@@ -26,6 +26,9 @@ namespace FindingHealthcareSystem
             services.AddScoped<IAppointmentService, AppointmentService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<ILocationService, LocationService>();
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddHttpContextAccessor();
+            services.AddTransient<ILocationService, LocationService>();
 
 
             return services;

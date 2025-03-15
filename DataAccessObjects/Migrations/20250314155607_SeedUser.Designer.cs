@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessObjects.Migrations
 {
     [DbContext(typeof(FindingHealthcareSystemContext))]
-    [Migration("20250304091724_Initial")]
-    partial class Initial
+    [Migration("20250314155607_SeedUser")]
+    partial class SeedUser
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -845,44 +845,26 @@ namespace DataAccessObjects.Migrations
                         .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Patients");
-                });
 
-            modelBuilder.Entity("BusinessObjects.Entities.PatientUnderlyingDisease", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETUTCDATE()");
-
-                    b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<int?>("PatientId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UnderlyingDiseaseId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETUTCDATE()");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PatientId");
-
-                    b.HasIndex("UnderlyingDiseaseId");
-
-                    b.ToTable("PatientUnderlyingDiseases");
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Note = "Bệnh nhân có tiền sử bệnh tim mạch",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Note = "Bệnh nhân bị tiểu đường type 2 và huyết áp cao",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = 3
+                        });
                 });
 
             modelBuilder.Entity("BusinessObjects.Entities.Payment", b =>
@@ -1039,6 +1021,42 @@ namespace DataAccessObjects.Migrations
                         .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Professionals");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "Số 10, Đường X, Hà Nội",
+                            City = "Hà Nội",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Degree = "Bác sĩ đa khoa",
+                            District = "Ba Đình",
+                            Experience = "Có 10 năm kinh nghiệm trong lĩnh vực khám chữa bệnh",
+                            ExpertiseId = 1,
+                            IsDeleted = false,
+                            Province = "Hà Nội",
+                            RequestStatus = "Approved",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = 4,
+                            WorkingHours = "Thứ 2 - Thứ 6, 8:00 - 17:00"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "Số 15, Đường Y, Hồ Chí Minh",
+                            City = "Hồ Chí Minh",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Degree = "Bác sĩ y học cổ truyền",
+                            District = "Quận 1",
+                            Experience = "Có 5 năm kinh nghiệm trong điều trị các bệnh lý bằng y học cổ truyền",
+                            ExpertiseId = 2,
+                            IsDeleted = false,
+                            Province = "Hồ Chí Minh",
+                            RequestStatus = "Pending",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = 5,
+                            WorkingHours = "Thứ 2 - Thứ 7, 9:00 - 18:00"
+                        });
                 });
 
             modelBuilder.Entity("BusinessObjects.Entities.ProfessionalSpecialty", b =>
@@ -1077,6 +1095,35 @@ namespace DataAccessObjects.Migrations
                     b.HasIndex("SpecialtyId");
 
                     b.ToTable("ProfessionalSpecialties");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            ProfessionalId = 1,
+                            SpecialtyId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            ProfessionalId = 1,
+                            SpecialtyId = 2,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            ProfessionalId = 2,
+                            SpecialtyId = 12,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("BusinessObjects.Entities.PublicService", b =>
@@ -1343,222 +1390,6 @@ namespace DataAccessObjects.Migrations
                         });
                 });
 
-            modelBuilder.Entity("BusinessObjects.Entities.UnderlyingDisease", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETUTCDATE()");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("GETUTCDATE()");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UnderlyingDiseases");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Bệnh lý do rối loạn chuyển hóa đường trong máu",
-                            IsDeleted = false,
-                            Name = "Tiểu đường",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Tăng huyết áp có thể gây nguy cơ bệnh tim mạch",
-                            IsDeleted = false,
-                            Name = "Huyết áp cao",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Bệnh đường hô hấp mãn tính gây khó thở",
-                            IsDeleted = false,
-                            Name = "Hen suyễn",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Tình trạng mỡ thừa tích tụ quá mức gây ảnh hưởng sức khỏe",
-                            IsDeleted = false,
-                            Name = "Béo phì",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Tình trạng tim không bơm đủ máu đến cơ thể",
-                            IsDeleted = false,
-                            Name = "Suy tim",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 6,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Suy giảm chức năng thận ảnh hưởng đến bài tiết và lọc độc tố",
-                            IsDeleted = false,
-                            Name = "Suy thận",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 7,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Bệnh mãn tính gây khó thở, thường gặp ở người hút thuốc lá",
-                            IsDeleted = false,
-                            Name = "Bệnh phổi tắc nghẽn mãn tính (COPD)",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 8,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Suy giảm mật độ xương làm tăng nguy cơ gãy xương",
-                            IsDeleted = false,
-                            Name = "Loãng xương",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 9,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Rối loạn thần kinh ảnh hưởng đến vận động",
-                            IsDeleted = false,
-                            Name = "Bệnh Parkinson",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 10,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Bệnh thoái hóa thần kinh ảnh hưởng đến trí nhớ và nhận thức",
-                            IsDeleted = false,
-                            Name = "Bệnh Alzheimer",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 11,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Bệnh nhiễm virus viêm gan B gây tổn thương gan",
-                            IsDeleted = false,
-                            Name = "Viêm gan B",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 12,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Bệnh nhiễm virus viêm gan C có thể gây xơ gan",
-                            IsDeleted = false,
-                            Name = "Viêm gan C",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 13,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Mỡ máu cao có thể dẫn đến xơ vữa động mạch",
-                            IsDeleted = false,
-                            Name = "Rối loạn lipid máu",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 14,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Tắc nghẽn hoặc vỡ mạch máu não gây tổn thương não",
-                            IsDeleted = false,
-                            Name = "Đột quỵ",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 15,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Viêm loét dạ dày hoặc trào ngược dạ dày thực quản",
-                            IsDeleted = false,
-                            Name = "Bệnh dạ dày - tá tràng",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 16,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Giảm khả năng đề kháng với bệnh tật",
-                            IsDeleted = false,
-                            Name = "Suy giảm miễn dịch",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 17,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Bệnh tự miễn ảnh hưởng nhiều cơ quan trong cơ thể",
-                            IsDeleted = false,
-                            Name = "Bệnh Lupus ban đỏ hệ thống",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 18,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Bệnh không dung nạp gluten gây tổn thương ruột non",
-                            IsDeleted = false,
-                            Name = "Bệnh Celiac",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 19,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Suy giảm miễn dịch gây nguy cơ nhiễm trùng cao",
-                            IsDeleted = false,
-                            Name = "HIV/AIDS",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        },
-                        new
-                        {
-                            Id = 20,
-                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Description = "Bệnh do rối loạn chuyển hóa purin, gây viêm khớp",
-                            IsDeleted = false,
-                            Name = "Bệnh gút",
-                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
-                        });
-                });
-
             modelBuilder.Entity("BusinessObjects.Entities.User", b =>
                 {
                     b.Property<int>("Id")
@@ -1582,6 +1413,9 @@ namespace DataAccessObjects.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImgUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
@@ -1616,16 +1450,76 @@ namespace DataAccessObjects.Migrations
                         new
                         {
                             Id = 1,
-                            Birthday = new DateOnly(1985, 2, 20),
+                            Birthday = new DateOnly(1990, 1, 1),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "admin@gmail.com",
-                            Fullname = "Admin User",
-                            Gender = "Male",
+                            Email = "admin@example.com",
+                            Fullname = "Admin",
+                            Gender = "Nam",
                             IsDeleted = false,
-                            Password = "admin123",
-                            PhoneNumber = "0987654321",
+                            Password = "ad123456",
+                            PhoneNumber = "0901234567",
                             Role = "Admin",
                             Status = "Active",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Birthday = new DateOnly(1995, 5, 20),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "patient1@example.com",
+                            Fullname = "Trần Thị B",
+                            Gender = "Nữ",
+                            IsDeleted = false,
+                            Password = "pa123456",
+                            PhoneNumber = "0902345678",
+                            Role = "Patient",
+                            Status = "Active",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Birthday = new DateOnly(1996, 10, 12),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "patient2@example.com",
+                            Fullname = "Nguyễn Thị C",
+                            Gender = "Nữ",
+                            IsDeleted = false,
+                            Password = "pa123456",
+                            PhoneNumber = "0903456789",
+                            Role = "Patient",
+                            Status = "Active",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Birthday = new DateOnly(1985, 3, 15),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "professional1@example.com",
+                            Fullname = "Lê Minh D",
+                            Gender = "Nam",
+                            IsDeleted = false,
+                            Password = "pro123456",
+                            PhoneNumber = "0904567890",
+                            Role = "Professional",
+                            Status = "Active",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Birthday = new DateOnly(1987, 7, 30),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "professional2@example.com",
+                            Fullname = "Phan Minh E",
+                            Gender = "Nam",
+                            IsDeleted = false,
+                            Password = "pro123456",
+                            PhoneNumber = "0905678901",
+                            Role = "Professional",
+                            Status = "Inactive",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
@@ -1756,23 +1650,6 @@ namespace DataAccessObjects.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("BusinessObjects.Entities.PatientUnderlyingDisease", b =>
-                {
-                    b.HasOne("BusinessObjects.Entities.Patient", "Patient")
-                        .WithMany("PatientUnderlyingDiseases")
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("BusinessObjects.Entities.UnderlyingDisease", "UnderlyingDisease")
-                        .WithMany("PatientUnderlyingDiseases")
-                        .HasForeignKey("UnderlyingDiseaseId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.Navigation("Patient");
-
-                    b.Navigation("UnderlyingDisease");
-                });
-
             modelBuilder.Entity("BusinessObjects.Entities.PrivateService", b =>
                 {
                     b.HasOne("BusinessObjects.Entities.Professional", "Professional")
@@ -1899,8 +1776,6 @@ namespace DataAccessObjects.Migrations
                 {
                     b.Navigation("Appointments");
 
-                    b.Navigation("PatientUnderlyingDiseases");
-
                     b.Navigation("Reviews");
                 });
 
@@ -1919,11 +1794,6 @@ namespace DataAccessObjects.Migrations
             modelBuilder.Entity("BusinessObjects.Entities.Specialty", b =>
                 {
                     b.Navigation("ProfessionalSpecialties");
-                });
-
-            modelBuilder.Entity("BusinessObjects.Entities.UnderlyingDisease", b =>
-                {
-                    b.Navigation("PatientUnderlyingDiseases");
                 });
 
             modelBuilder.Entity("BusinessObjects.Entities.User", b =>

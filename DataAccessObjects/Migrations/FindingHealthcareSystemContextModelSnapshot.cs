@@ -842,6 +842,26 @@ namespace DataAccessObjects.Migrations
                         .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Patients");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Note = "Bệnh nhân có tiền sử bệnh tim mạch",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            Note = "Bệnh nhân bị tiểu đường type 2 và huyết áp cao",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = 3
+                        });
                 });
 
             modelBuilder.Entity("BusinessObjects.Entities.Payment", b =>
@@ -998,6 +1018,42 @@ namespace DataAccessObjects.Migrations
                         .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Professionals");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "Số 10, Đường X, Hà Nội",
+                            City = "Hà Nội",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Degree = "Bác sĩ đa khoa",
+                            District = "Ba Đình",
+                            Experience = "Có 10 năm kinh nghiệm trong lĩnh vực khám chữa bệnh",
+                            ExpertiseId = 1,
+                            IsDeleted = false,
+                            Province = "Hà Nội",
+                            RequestStatus = "Approved",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = 4,
+                            WorkingHours = "Thứ 2 - Thứ 6, 8:00 - 17:00"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "Số 15, Đường Y, Hồ Chí Minh",
+                            City = "Hồ Chí Minh",
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Degree = "Bác sĩ y học cổ truyền",
+                            District = "Quận 1",
+                            Experience = "Có 5 năm kinh nghiệm trong điều trị các bệnh lý bằng y học cổ truyền",
+                            ExpertiseId = 2,
+                            IsDeleted = false,
+                            Province = "Hồ Chí Minh",
+                            RequestStatus = "Pending",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = 5,
+                            WorkingHours = "Thứ 2 - Thứ 7, 9:00 - 18:00"
+                        });
                 });
 
             modelBuilder.Entity("BusinessObjects.Entities.ProfessionalSpecialty", b =>
@@ -1036,6 +1092,35 @@ namespace DataAccessObjects.Migrations
                     b.HasIndex("SpecialtyId");
 
                     b.ToTable("ProfessionalSpecialties");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            ProfessionalId = 1,
+                            SpecialtyId = 1,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            ProfessionalId = 1,
+                            SpecialtyId = 2,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            ProfessionalId = 2,
+                            SpecialtyId = 12,
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("BusinessObjects.Entities.PublicService", b =>
@@ -1327,6 +1412,9 @@ namespace DataAccessObjects.Migrations
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImgUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
@@ -1359,16 +1447,76 @@ namespace DataAccessObjects.Migrations
                         new
                         {
                             Id = 1,
-                            Birthday = new DateOnly(1985, 2, 20),
+                            Birthday = new DateOnly(1990, 1, 1),
                             CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "admin@gmail.com",
-                            Fullname = "Admin User",
-                            Gender = "Male",
+                            Email = "admin@example.com",
+                            Fullname = "Admin",
+                            Gender = "Nam",
                             IsDeleted = false,
-                            Password = "admin123",
-                            PhoneNumber = "0987654321",
+                            Password = "ad123456",
+                            PhoneNumber = "0901234567",
                             Role = "Admin",
                             Status = "Active",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Birthday = new DateOnly(1995, 5, 20),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "patient1@example.com",
+                            Fullname = "Trần Thị B",
+                            Gender = "Nữ",
+                            IsDeleted = false,
+                            Password = "pa123456",
+                            PhoneNumber = "0902345678",
+                            Role = "Patient",
+                            Status = "Active",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Birthday = new DateOnly(1996, 10, 12),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "patient2@example.com",
+                            Fullname = "Nguyễn Thị C",
+                            Gender = "Nữ",
+                            IsDeleted = false,
+                            Password = "pa123456",
+                            PhoneNumber = "0903456789",
+                            Role = "Patient",
+                            Status = "Active",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Birthday = new DateOnly(1985, 3, 15),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "professional1@example.com",
+                            Fullname = "Lê Minh D",
+                            Gender = "Nam",
+                            IsDeleted = false,
+                            Password = "pro123456",
+                            PhoneNumber = "0904567890",
+                            Role = "Professional",
+                            Status = "Active",
+                            UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Birthday = new DateOnly(1987, 7, 30),
+                            CreatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "professional2@example.com",
+                            Fullname = "Phan Minh E",
+                            Gender = "Nam",
+                            IsDeleted = false,
+                            Password = "pro123456",
+                            PhoneNumber = "0905678901",
+                            Role = "Professional",
+                            Status = "Inactive",
                             UpdatedAt = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
                         });
                 });
