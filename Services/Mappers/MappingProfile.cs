@@ -21,6 +21,8 @@ namespace Services.Mappers
             CreateMap<User, GeneralUserDto>().ReverseMap();
             CreateMap<Department, DepartmentDto>().ReverseMap();
             CreateMap<FacilityType, FacilityTypeDto>().ReverseMap();
+            CreateMap<FacilityDepartment, FacilityDepartmentDto>().ReverseMap();
+            CreateMap<Facility, FacilityDto>().ReverseMap();
             CreateMap<User, LoginDto>().ReverseMap();
             CreateMap<Appointment, AppointmentDTO>().ReverseMap();
             CreateMap<User, LoginDto>().ReverseMap();

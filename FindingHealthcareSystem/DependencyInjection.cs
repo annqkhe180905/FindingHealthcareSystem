@@ -28,11 +28,10 @@ namespace FindingHealthcareSystem
             services.AddTransient<ILocationService, LocationService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddHttpContextAccessor();
-            services.AddTransient<ILocationService, LocationService>();
-
-            services.AddTransient<ILocationService, LocationService>();
+            services.AddScoped<IFacilityDao, FacilityDao>();
+            services.AddScoped<IFacilityRepository, FacilityRepository>();
+            services.AddScoped<IFacilityService, FacilityService>();
             services.AddScoped<IAuthService, AuthService>();
-            services.AddHttpContextAccessor();
 
             return services;
         }

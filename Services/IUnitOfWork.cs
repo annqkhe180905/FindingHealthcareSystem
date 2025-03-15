@@ -10,6 +10,9 @@ namespace Services
     public interface IUnitOfWork : IDisposable
     {
         IGenericRepository<T> GetRepository<T>() where T : class;
+
+        IFacilityRepository FacilityRepository { get; }
+
         Task<int> SaveChangesAsync();
     } 
 }
