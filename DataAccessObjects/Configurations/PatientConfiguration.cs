@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection.Emit;
 
 namespace DataAccessObjects.Configurations
 {
@@ -16,20 +17,19 @@ namespace DataAccessObjects.Configurations
             builder.HasKey(e => e.Id);
 
             builder.HasOne(p => p.User)
-                .WithMany(u => u.Patients)
-                .HasForeignKey(p => p.UserId)
+           .WithOne(u => u.Patient)
+           .HasForeignKey<Patient>(p => p.UserId)
+           .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasMany(p => p.Appointments)
+                .WithOne(a => a.Patient)
+                .HasForeignKey(a => a.PatientId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasData(
-                new Patient
-                {
-                    Id = 1,
-                    UserId = 2,
-                    Note = "John's medical history",
-                    CreatedAt = new DateTime(2024, 1, 1),
-                    UpdatedAt = new DateTime(2024, 1, 1)
-                }
-            );
+            builder.HasMany(p => p.Reviews)
+                .WithOne(r => r.Patient)
+                .HasForeignKey(r => r.PatientId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

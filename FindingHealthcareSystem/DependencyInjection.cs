@@ -9,6 +9,7 @@ using Services.Services;
 using DataAccessObjects.Interfaces;
 using DataAccessObjects.DAOs;
 using Services;
+using BusinessObjects.Entities;
 
 namespace FindingHealthcareSystem
 {
@@ -22,8 +23,9 @@ namespace FindingHealthcareSystem
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IDepartmentService, DepartmentService>();
             services.AddScoped<IFacilityTypeService, FacilityTypeService>();
+            services.AddScoped<IAppointmentService, AppointmentService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddTransient<ILocationService, LocationService>(); 
+            services.AddTransient<ILocationService, LocationService>();
 
 
             return services;
