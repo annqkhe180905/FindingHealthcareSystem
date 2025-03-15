@@ -4,6 +4,10 @@ using DataAccessObjects;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Repositories.Interfaces;
+using Repositories.Repositories;
+using Services.Interfaces;
+using Services.Services;
 
 
 namespace FindingHealthcareSystem
@@ -20,6 +24,8 @@ namespace FindingHealthcareSystem
             builder.Services.AddDbContext<FindingHealthcareSystemContext>(o =>
             o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
             builder.Services.AddApplicationService();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IUserService, UserService>();
 
             var app = builder.Build();
 

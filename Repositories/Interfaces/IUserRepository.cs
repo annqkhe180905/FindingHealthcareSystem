@@ -1,4 +1,5 @@
-﻿using BusinessObjects.Entities;
+﻿using BusinessObjects.DTOs.User;
+using BusinessObjects.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,14 @@ namespace Repositories.Interfaces
         Task UpdateAsync(User user);
 
         Task DeleteAsync(int id);
+
+
+        Task<List<Specialty>> GetAllSpecialtiesAsync();
+        Task<List<FacilityDepartment>> GetAllHospitalsAsync();
+
+        Task<List<Expertise>> GetAllExpertises();
+
+        Task RegisterUserAsync(RegisterUserDto userDto);
 
     }
 }

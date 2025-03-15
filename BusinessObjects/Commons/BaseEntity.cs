@@ -11,7 +11,8 @@ namespace BusinessObjects.Commons
     {
         //User automatically gets Id, CreatedAt, and UpdatedAt fields.
         public int Id { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+        public bool IsDeleted { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
     }
 }

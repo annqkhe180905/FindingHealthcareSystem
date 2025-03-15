@@ -1,4 +1,6 @@
-﻿using BusinessObjects.Entities;
+﻿using BusinessObjects.DTOs.User;
+using BusinessObjects.Entities;
+using BusinessObjects.Enums;
 using DataAccessObjects;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Interfaces;
@@ -42,6 +44,17 @@ namespace Repositories.Repositories
 
         }
 
+        public async Task<List<FacilityDepartment>> GetAllHospitalsAsync()
+        {
+            return await _context.FacilityDepartments.ToListAsync();
+        }
+
+        public async Task<List<Specialty>> GetAllSpecialtiesAsync()
+        {
+
+            return await _context.Specialties.ToListAsync();
+        }
+
         public async Task<User?> GetByIdAsync(int id)
         {
             return await _context.Users.FindAsync(id);
@@ -51,6 +64,68 @@ namespace Repositories.Repositories
         {
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task RegisterUserAsync(RegisterUserDto userDto)
+        {
+
+
+            // Kiểm tra email đã tồn tại chưa
+            bool emailExists = await _context.Users.AnyAsync(p => p.Email == userDto.Email);
+
+            if (emailExists)
+            {
+                throw new Exception("Email đã tồn tại. Vui lòng sử dụng email khác.");
+            }
+
+            var user = new User
+            {
+                Fullname = userDto.Fullname,
+                Email = userDto.Email,
+                PhoneNumber = userDto.PhoneNumber,
+                Password = userDto.Password,
+                Role = userDto.Role,
+                Status = UserStatus.Active,
+                Birthday = userDto.Birthday,
+                Gender = userDto.Gender
+            };
+
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+
+            if (userDto.Role == Role.Professional)
+            {
+                var professional = new Professional
+                {
+                    UserId = user.Id,
+                    Province = userDto.Province,
+                    City = userDto.City,
+                    District=userDto.District,
+                    Address = userDto.Address,
+                    WorkingHours=userDto.WorkingHours,
+                    Degree = userDto.Degree,
+                    ExpertiseId = userDto.ExpertiseId,
+                    Experience = userDto.Experience,
+                    RequestStatus = ProfessionalRequestStatus.Pending
+                };
+                _context.Professionals.Add(professional);
+                await _context.SaveChangesAsync();
+
+                foreach (var specialtyId in userDto.SpecialtyIds)
+                {
+                    _context.ProfessionalSpecialties.Add(new ProfessionalSpecialty
+                    {
+                        ProfessionalId = professional.Id,
+                        SpecialtyId = specialtyId
+                    });
+                }
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task<List<Expertise>> GetAllExpertises()
+        {
+            return await _context.Expertises.ToListAsync();
         }
     }
 }

@@ -15,8 +15,10 @@ namespace DataAccessObjects.Configurations
         {
             builder.HasKey(e => e.Id);
 
-            builder.Property(ai => ai.ImgUrl)
-                   .IsRequired();
+            builder.HasOne(ai => ai.Article)
+           .WithMany(a => a.ArticleImages)
+           .HasForeignKey(ai => ai.ArticleId)
+           .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
